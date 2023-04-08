@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
+body {
+  background: grey;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.viewport {
+  width: 800px;
+  height: 480px;
+  background: black;
+  color:white;
+  overflow: hidden;
+  position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.center-screen {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.rotate-90 {
+  rotate: 90deg;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.rotate-180 {
+  rotate: 180deg;
+}
+
+.flex-container {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-1 {
+  /*border: 20px powderblue solid;*/
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+}
+
+#speedometer {
+  position: absolute;
+  width: 480px;
+  left: -240px;
+  top: 0px;
+}
+
+#battery-current {
+  position: absolute;
+  width: 480px;
+  left: 560px;
+  top: 0px;
 }
