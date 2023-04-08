@@ -6,8 +6,10 @@ function App() {
 
   const [data, setData] = useState([{}])
 
+  const url = "http://localhost:5000/can_data"
+
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/members').then(
+    fetch(url).then(
       res => res.json()
     ).then(
       data => {
@@ -25,14 +27,14 @@ function App() {
         </label>
 
 
-        {(typeof data.members === 'undefined') ? (
+        {(typeof data.rpm === 'undefined') ? (
           <p>loading...</p>
         ) : (
-          data.members.map((member, i) => (
-            <p key={i}>{member}</p>
-          ))
+          const obj = data;
+          for (var key in obj){
+            <p id=`${key}`>obj[key]<p>
+          }
         )}
-
 
       </div>
     </div>
