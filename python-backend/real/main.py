@@ -18,7 +18,10 @@ try:
             can_data = canner.getData()
             print(str(can_data))
             query = {'field': can_data}
-            req = requests.post(url, json=can_data)
+            try:
+                req = requests.post(url, json=can_data)
+            except:
+                pass
 
 except KeyboardInterrupt:
     pass

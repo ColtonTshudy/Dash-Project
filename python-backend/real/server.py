@@ -20,11 +20,14 @@ CORS(app)
 
 @app.route("/can_data")
 def can_data():
+    global can_data_dict
     return can_data_dict
 
 @app.route('/', methods=['POST'])
 def get_data():
-    print(f'Recieved from client: {request.json}')
-    return Response('We recieved something…')
+    global can_data_dict
+    can_data_dict = request.json
+    print(f'Recieved from client: {can_data_dict}')
+    return Response('success')
 
 app.run(debug=True, threaded=True)
