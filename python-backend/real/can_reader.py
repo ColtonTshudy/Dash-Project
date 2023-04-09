@@ -49,28 +49,22 @@ class Canner:
 
         try:
             if status == 9:  # Current and misc
-                self.data['rpm'] = (buf[0] << 24) + \
-                    (buf[1] << 16) + (buf[2] << 8) + buf[3]
-                self.data['motor_current'] = ((buf[4] << 8) + buf[5])/10
-                self.data['duty_cycle'] = ((buf[6] << 8) + buf[7])/1000
+                self.data['rpm'] = (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3]
+                self.data['motor_current'] = self.signed16((buf[4] << 8) + buf[5])/10
+                self.data['duty_cycle'] = self.signed16((buf[6] << 8) + buf[7])/1000
             elif status == 14:  # Amp hour stats
-                self.data['ah_consumed'] = (
-                    (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])/10000
-                self.data['ah_regen'] = (
-                    (buf[4] << 24) + (buf[5] << 16) + (buf[6] << 8) + buf[7])/10000
+                self.data['ah_consumed'] = ((buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])/10000
+                self.data['ah_regen'] = ((buf[4] << 24) + (buf[5] << 16) + (buf[6] << 8) + buf[7])/10000
             elif status == 15:  # Watt hour stats
-                self.data['wh_consumed'] = (
-                    (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])/10000
-                self.data['wh_regen'] = (
-                    (buf[4] << 24) + (buf[5] << 16) + (buf[6] << 8) + buf[7])/10000
+                self.data['wh_consumed'] = ((buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])/10000
+                self.data['wh_regen'] = ((buf[4] << 24) + (buf[5] << 16) + (buf[6] << 8) + buf[7])/10000
             elif status == 16:  # Temperature and misc
-                self.data['mos_temp'] = ((buf[0] << 8) + buf[1])/10
-                self.data['mot_temp'] = ((buf[2] << 8) + buf[3])/10
-                self.data['battery_current'] = ((buf[4] << 8) + buf[5])/10
+                self.data['mos_temp'] = self.signed16((buf[0] << 8) + buf[1])/10
+                self.data['mot_temp'] = self.signed16((buf[2] << 8) + buf[3])/10
+                self.data['battery_current'] = self.signed16((buf[4] << 8) + buf[5])/10
                 self.data['pid_position'] = ((buf[6] << 8) + buf[7])
             elif status == 27:  # Tachometer and battery voltage
-                self.data['tachometer'] = (
-                    (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])
+                self.data['tachometer'] = ((buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])
                 self.data['battery_voltage'] = ((buf[4] << 8) + buf[5])/10
         except:
             print("data aquisition error")
@@ -82,6 +76,13 @@ class Canner:
         if id not in self.id_list:
             self.id_list.append(id)
             self.data['ids'] += f'{id} '
+
+    # Turn a 16 bit unsigned integer into a signed integer
+    def signed16(self, int_16):
+        int_16_s = int_16
+        if int_16 > 32767:
+            int_16_s = -((int_16-1)^0b1111111111111111)
+        return int_16_s
 
     def __str__(self):
         return str(self.data)
