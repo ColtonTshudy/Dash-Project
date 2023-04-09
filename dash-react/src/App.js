@@ -25,17 +25,6 @@ function App() {
         <label>
           Moped Guage App
         </label>
-
-
-        {(typeof data.rpm === 'undefined') ? (
-          <p>loading...</p>
-        ) : (
-          const obj = data;
-          for (var key in obj){
-            <p id=`${key}`>obj[key]<p>
-          }
-        )}
-
       </div>
     </div>
   );
