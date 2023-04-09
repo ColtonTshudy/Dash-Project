@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 
-
 function App() {
 
   const [data, setData] = useState([{}])
@@ -16,7 +15,11 @@ function App() {
         setData(data)
         console.log(data)
       }
-    )
+    ).then(() => {
+      Object.entries(data).map( ([key, value]) => <p key={key}>`${key} = ${value}`</p> )
+      console.log()
+    })
+
   }, [])
 
   return (
