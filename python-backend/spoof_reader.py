@@ -60,11 +60,12 @@ class Canner:
             "mot_temp": (i/5+20)%80,
             "battery_current": i%80,
             "pid_position": i%50000,
-            "tachometer": i%1000000/self.config['mot_poles'],
-            "battery_voltage": (i/100+42)%58,
+            "tachometer": (i*100%1000000)/self.config['mot_poles'],
+            "battery_voltage": 58-(i/20)%(58-40),
             "ids": "14 15 16 0 27",
             "mph": self._mph(((i*100%40000)-10000)/self.config['mot_poles']),
             "odometer": self._miles((i*100%1000000)/self.config['mot_poles']),
+            "mot_watts": i*100%14000-7000,
         }
         return True
 
