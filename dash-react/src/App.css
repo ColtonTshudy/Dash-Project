@@ -32,10 +32,16 @@ body {
 }
 
 .flex-container {
-  align-items: center;
+  display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .rounded {
   border-radius: 200px;
+}
+
+.rawtext {
+  font-size: 50px;
 }

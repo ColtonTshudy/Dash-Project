@@ -3,24 +3,27 @@ import React, { useState, useEffect } from "react";
 
 function App() {
 
-  const [data, setData] = useState([{}])
+  const [data, setData] = useState({})
 
   const url = "http://localhost:5000/can_data"
 
   useEffect(() => {
-    fetch(url).then(
-      res => res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    ).then(() => {
-      Object.entries(data).map( ([key, value]) => <p key={key}>`${key} = ${value}`</p> )
-      console.log()
-    })
+    const timeId = setTimeout(() => {
+      fetch(url).then(
+        res => res.json()
+      ).then(
+        data => {
+          setData(data)
+          console.log(data)
+        }
+      )
+    }, 1000)
 
-  }, [])
+    return () => {
+      console.log("cleaned")
+      clearTimeout(timeId)
+    }
+  }, [data])
 
   return (
     <div className="center-screen">
@@ -28,6 +31,9 @@ function App() {
         <label>
           Moped Guage App
         </label>
+
+        {Object.entries(data).map( ([key, value]) => <label key={key} className='rawtext'>{key} = {value}</label> )}
+
       </div>
     </div>
   );
