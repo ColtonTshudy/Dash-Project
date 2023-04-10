@@ -17,7 +17,7 @@ function App() {
           console.log(data)
         }
       )
-    }, 1000)
+    }, 100)
 
     return () => {
       console.log("cleaned")
@@ -32,7 +32,7 @@ function App() {
           Moped Guage App
         </label>
 
-        {Object.entries(data).map( ([key, value]) => <label key={key} className='rawtext'>{key} = {value}</label> )}
+        {Object.entries(data).map( ([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value*100)/100}</label> )}
 
       </div>
     </div>

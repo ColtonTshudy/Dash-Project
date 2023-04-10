@@ -5,23 +5,19 @@ __status__ = "Prototyping"
 
 # This program runs the application loop
 
-import can_reader
 from flask import Flask, Response, request
 from flask_cors import CORS
 
-### CANNER SETUP
-canner = can_reader.Canner()
-can_data_dict = dict()
-### /CANNER SETUP
-
-### FLASK SERVER
+# FLASK SERVER
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route("/can_data")
 def can_data():
     global can_data_dict
     return can_data_dict
+
 
 @app.route('/', methods=['POST'])
 def get_data():
@@ -29,5 +25,6 @@ def get_data():
     can_data_dict = request.json
     print(f'Recieved from client: {can_data_dict}')
     return Response('success')
+
 
 app.run(debug=True, threaded=True)
