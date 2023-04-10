@@ -48,6 +48,7 @@ class Canner:
             'ids': '',
             'mph': 0,
             'odometer': 0,
+            'motor_voltage': 0,
         }
 
     def scan(self):
@@ -73,6 +74,7 @@ class Canner:
                 self.data['motor_current'] = self._signed16((buf[4] << 8) + buf[5])/10
                 self.data['duty_cycle'] = self._signed16((buf[6] << 8) + buf[7])/1000
                 self.data['mph'] = self._mph(self.data['rpm'])
+                self.data['motor_voltage'] = self.data['rpm']/self.config['motor_kv']
             elif status == 14:  # Amp hour stats
                 self.data['ah_consumed'] = ((buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3])/10000
                 self.data['ah_regen'] = ((buf[4] << 24) + (buf[5] << 16) + (buf[6] << 8) + buf[7])/10000

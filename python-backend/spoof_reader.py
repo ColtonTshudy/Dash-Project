@@ -44,28 +44,29 @@ class Canner:
             'ids': '',
             'mph': 0,
             'odometer': 0,
+            'mot_watts': 0,
         }
 
     def scan(self, i):
         self.data = {
-            "erpm": (i*100%40000)-10000,
-            "rpm": ((i*100%40000)-10000)/self.config['mot_poles'],
-            "motor_current": i%300-150,
-            "duty_cycle": i/100%1,
-            "ah_consumed": i/500%16,
-            "ah_regen": i/2000%16,
-            "wh_consumed": i/2%800,
-            "wh_regen": i/50%800,
-            "mos_temp": (i/5+30)%80,
-            "mot_temp": (i/5+20)%80,
-            "battery_current": i%80,
-            "pid_position": i%50000,
-            "tachometer": (i*100%1000000)/self.config['mot_poles'],
-            "battery_voltage": 58-(i/20)%(58-40),
+            "erpm": (i*100 % 40000)-10000,
+            "rpm": ((i*100 % 40000)-10000)/self.config['mot_poles'],
+            "motor_current": i % 300-150,
+            "duty_cycle": i/100 % 1,
+            "ah_consumed": i/500 % 16,
+            "ah_regen": i/2000 % 16,
+            "wh_consumed": i/2 % 800,
+            "wh_regen": i/50 % 800,
+            "mos_temp": (i/5+30) % 80,
+            "mot_temp": (i/5+20) % 80,
+            "battery_current": i % 80,
+            "pid_position": i % 50000,
+            "tachometer": (i*100 % 1000000)/self.config['mot_poles'],
+            "battery_voltage": 58-(i/20) % (58-40),
             "ids": "14 15 16 0 27",
-            "mph": self._mph(((i*100%40000)-10000)/self.config['mot_poles']),
-            "odometer": self._miles((i*100%1000000)/self.config['mot_poles']),
-            "mot_watts": i*100%14000-7000,
+            "mph": self._mph(((i*100 % 40000)-10000)/self.config['mot_poles']),
+            "odometer": self._miles((i*100 % 1000000)/self.config['mot_poles']),
+            "motor_voltage": i%58,
         }
         return True
 
@@ -80,11 +81,11 @@ class Canner:
     def _mph(self, rpm):
         mph = self._miles(rpm)*60
         return mph
-    
+
     def _miles(self, rotations):
         ratio = self.config["mot_teeth"]/self.config["rear_teeth"]  # gear ratio
-        wheel_dia = self.config["rear_dia_in"]*math.pi # inch diameter of wheel
-        miles = rotations*ratio*wheel_dia/63360 # total miles of rotations
+        wheel_dia = self.config["rear_dia_in"]*math.pi  # inch diameter of wheel
+        miles = rotations*ratio*wheel_dia/63360  # total miles of rotations
         return miles
 
     def __str__(self):
@@ -110,4 +111,4 @@ if __name__ == "__main__":
             except requests.exceptions.RequestException:
                 print('No server response')
         time.sleep(0.1)
-        i+=2
+        i += 2
