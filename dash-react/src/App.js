@@ -1,5 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
+import P5Comp from './components/P5.js';
+import ReactP5Comp from './components/react_p5.js';
 
 function App() {
 
@@ -37,7 +39,11 @@ function App() {
       <div className="viewport flex-container">
       <label>Moped Guage App</label>
 
-      {Object.entries(data).map( ([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value*100)/100}</label> )}
+      {/*Object.entries(data).map( ([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value*100)/100}</label> )*/}
+
+      <P5Comp className="item"/>
+
+      <ReactP5Comp className="item2"/>
 
       </div>
     </div>

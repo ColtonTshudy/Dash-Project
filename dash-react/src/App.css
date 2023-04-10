@@ -36,6 +36,21 @@ body {
   justify-content: space-between;
   flex-direction: column;
   flex-wrap: wrap;
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  top:50px;
+  left: 50px;
+  background: green;
+}
+
+.item2 {
+  position: absolute;
+  top: 100px;
+  left: 400px;
+  background: green;
 }
 
 .rounded {
