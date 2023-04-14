@@ -3,24 +3,22 @@ import p5 from 'p5'
 
 // WEBGL
 
-let x = 0;
-let y = 0;
-let c = 0;
 class P5Comp extends Component {
     /**
       * Default props
       */
     static defaultProps = {
-        className: ""
+        className: "",
+        fragShader: undefined,
     };
 
     /**
-      * @param props: className, 
+      * @param props: className, fragShader
       */
     constructor(props) {
         super(props);
         this.myRef = createRef()  //createRef() provides a way to integrate third-party DOM elements into our React app.// Check https://reactjs.org/docs/refs-and-the-dom.html for more detail.
-        this.state = { className: this.props.className }
+        this.state = { className: this.props.className, fragShader: this.props.fragShader }
     }
 
     // We define our sketch here
@@ -29,27 +27,24 @@ class P5Comp extends Component {
     // We call this function object when initializing new p5 object.
     Sketch = (p) => {
         p.preload = () => {
-            this.shader = p.loadShader('shader.vert', 'shader.frag');
+            if (!(this.state.fragShader === ""))
+                this.shader = p.loadShader('/shaders/shader.vert', this.state.fragShader);
         }
         p.setup = () => {
             this.canvas = p.createCanvas(100, 100, p.WEBGL)
         }
         p.draw = () => {
+            if (!(this.state.fragShader === "")) {
+                this.shader.setUniform("u_time",p.frameCount)
+            }
             p.background(p.frameCount % 255)
-            p.ellipse(x, y, 70, 70);
-            c++;
-            x = (c % 240) - 70*2
         }
     }
 
     componentDidMount() {
         // After rendering the component class we have access to the element reference inside the DOM tree.
         // Looking at the constructor we can see the p5 object gets sketch and HTMLElement
-        this.sketchObj = new p5(this.Sketch, this.myRef.current)
-    }
-
-    componentWillUnmount() {
-        this.sketchObj.remove()
+        new p5(this.Sketch, this.myRef.current)
     }
 
     render() {

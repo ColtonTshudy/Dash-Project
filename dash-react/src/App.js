@@ -12,22 +12,22 @@ function App() {
 
   useEffect(() => {
     fetch(url).then(res => {
-      if(res.status >= 400) {
+      if (res.status >= 400) {
         throw new Error("Server responds with error!");
       }
       return res.json()
     })
-    .then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    )
-    .catch(err => {
-      console.log(err)
-    })
+      .then(
+        data => {
+          setData(data)
+          console.log(data)
+        }
+      )
+      .catch(err => {
+        console.log(err)
+      })
     const retryTimeId = setTimeout(() => {
-      setCount(prevState=>({count: prevState.count+1}))
+      setCount(prevState => ({ count: prevState.count + 1 }))
     }, 10000) //retry every 10 seconds
     return () => {
       clearTimeout(retryTimeId) //reset retry timer
@@ -37,13 +37,13 @@ function App() {
   return (
     <div className="center-screen">
       <div className="viewport flex-container">
-      <label>Moped Guage App</label>
+        <label>Moped Guage App</label>
 
-      {/*Object.entries(data).map( ([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value*100)/100}</label> )*/}
+        {Object.entries(data).map(([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value * 100) / 100}</label>)}
 
-      <P5Comp className="item"/>
+        <P5Comp className="item" fragShader="/shaders/led-progress.frag" />
 
-      <ReactP5Comp className="item2"/>
+        <ReactP5Comp className="item2" />
 
       </div>
     </div>

@@ -53,6 +53,13 @@ body {
   background: green;
 }
 
+.item3 {
+  position: absolute;
+  top: 400px;
+  left: 400px;
+  background: green;
+}
+
 .rounded {
   border-radius: 200px;
 }

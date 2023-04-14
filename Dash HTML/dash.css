@@ -3,7 +3,7 @@
  * version: 04/07/2023
  */
 
- body {
+body {
     background: grey;
 }
 
@@ -11,9 +11,9 @@
     width: 800px;
     height: 480px;
     background: white;
-    color:black;
+    color: black;
     overflow: hidden;
-    position: relative;
+    position: absolute;
 }
 
 .center-screen {
@@ -61,5 +61,16 @@
 
 .curved {
     border-radius: 50px;
+}
 
+#led-sketch {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+#clock-sketch {
+    position: absolute;
+    top: 500;
+    left: 50px;
 }
