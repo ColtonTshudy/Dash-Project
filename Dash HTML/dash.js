@@ -25,6 +25,25 @@ const LedSketch = (p) => {
   };
 };
 
+const LedReadout = (p) => {
+  p.preload = () => {
+    shader = p.loadShader('shader.vert', 'led-readout.frag');
+  }
+
+  p.setup = () => {
+    let canvas = p.createCanvas(400, 400, p.WEBGL);
+    canvas.parent('led-readout');
+    t = 0
+  };
+
+  p.draw = () => {
+    p.shader(shader)
+    shader.setUniform("u_value", 0.5)
+    shader.setUniform("u_resolution", [p.width * p.pixelDensity(), p.width * p.pixelDensity()])
+    p.rect(0, 0, p.width, p.height)
+  };
+};
+
 const ClockSketch = (p) => {
   p.preload = () => {
     shader = p.loadShader('shader.vert', 'clock.frag');
@@ -50,4 +69,5 @@ const ClockSketch = (p) => {
 
 function onload() {
   new p5(LedSketch)
+  new p5(LedReadout)
 }

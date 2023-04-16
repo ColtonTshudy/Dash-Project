@@ -1,7 +1,7 @@
 //Following the meme / hype train started by mrange https://www.shadertoy.com/view/DlsXzn
 //mercurysexy
 
-// LED readout of 10 LEDs set by a float value from 0 to 10
+// LED readout of 10 LEDs set by a float value from 0 to 1
 
 precision highp float;
 
@@ -34,7 +34,7 @@ void main()
     vec3 col=vec3(0.); //returned color and background color
     vec3 inactive = vec3(1.); //off color
     vec3 act = vec3(.45,.55,1.); //on color
-    float st = mod(u_value,15.); //second number determines number of LEDs
+    float st = mod(u_value/10.,15.); //second number determines number of LEDs
     float e=0.;
     float g=0.;
     for(float i=1.;i<10.;i++){

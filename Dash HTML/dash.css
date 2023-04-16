@@ -69,6 +69,12 @@ body {
     left: 50px;
 }
 
+#led-readout {
+    position: absolute;
+    top: 50px;
+    left: 400px;
+}
+
 #clock-sketch {
     position: absolute;
     top: 500;
