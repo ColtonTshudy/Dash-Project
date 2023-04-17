@@ -8,8 +8,8 @@ body {
 }
 
 .viewport {
-    width: 800px;
-    height: 480px;
+    width: 1024px;
+    height: 800px;
     background: white;
     color: black;
     overflow: hidden;
@@ -65,14 +65,15 @@ body {
 
 #led-sketch {
     position: absolute;
-    top: 50px;
-    left: 50px;
+    bottom: -4px;
+    left: 0px;
 }
 
 #led-readout {
     position: absolute;
     top: 50px;
     left: 400px;
+    background-color: blue;
 }
 
 #clock-sketch {

@@ -27,14 +27,14 @@ float pModInterval1(inout float p, float size, float start, float stop) {
 
 void main()
 {
-    vec2 uv = (gl_FragCoord.xy -.5* u_resolution.xy)/u_resolution.y;
+    vec2 uv = 2.0*(gl_FragCoord.xy -.5* u_resolution.xy)/u_resolution.y;
     
     vec3 p=vec3(0);
     vec3 d=vec3(uv,1.);
     vec3 col=vec3(0.); //returned color and background color
     vec3 inactive = vec3(1.); //off color
     vec3 act = vec3(.45,.55,1.); //on color
-    float st = mod(u_value/10.,15.); //second number determines number of LEDs
+    float st = mod(u_value*10.,15.); //second number determines number of LEDs
     float e=0.;
     float g=0.;
     for(float i=1.;i<10.;i++){
