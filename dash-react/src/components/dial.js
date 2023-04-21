@@ -1,7 +1,7 @@
 import React, { Component, createRef } from "react";
 import p5 from 'p5'
 import vert from '../shaders/shader.vert'
-import frag from '../shaders/led_readout.frag'
+import frag from '../shaders/circle-progress.frag'
 
 // WEBGL
 
@@ -12,6 +12,7 @@ class P5Comp extends Component {
     static defaultProps = {
         className: "",
         value: 0,
+        max: 0,
     };
 
     /**
@@ -26,28 +27,19 @@ class P5Comp extends Component {
     // Defining the sketch
     Sketch = (p) => {
         p.preload = () => {
-            this.shader = p.loadShader(vert, frag);
+            this.shader = p.loadShader(vert, frag, null, 'es3');
         }
         p.setup = () => {
-            this.canvas = p.createCanvas(100, 600, p.WEBGL)
+            this.canvas = p.createCanvas(400, 400, p.WEBGL)
         }
         p.draw = () => {
             let value = this.props.value
-            if (this.props.value < 0){
-                this.extraClass = 'rotate-180'
-                value = -value
-            }
-            else
-                this.extraClass = ''
 
             p.shader(this.shader)
             this.shader.setUniform("u_value", value)
+            this.shader.setUniform("u_max_value", this.props.max)
             this.shader.setUniform("u_resolution", [p.width * p.pixelDensity(), p.height * p.pixelDensity()])
             p.rect(0, 0, p.width, p.height)
-            if (this.props.value < 0)
-                this.extraClass = 'rotate-180'
-            else
-                this.extraClass = ''
         }
     }
 

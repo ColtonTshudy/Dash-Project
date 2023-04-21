@@ -78,3 +78,9 @@ body {
   position: absolute;
   left: calc(1024px - 100px);
 }
+
+.speed-dial {
+  position: absolute;
+  left: 400px;
+  top: 0px;
+}

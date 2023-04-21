@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
-import P5Comp from './components/P5.js';
+import LedReadout from './components/led-readout.js';
+import Dial from './components/dial.js';
 // import ReactP5Comp from './components/react_p5.js';
 
 function App() {
@@ -41,8 +42,8 @@ function App() {
 
         {Object.entries(data).map(([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value * 100) / 100}</label>)}
 
-        <P5Comp className="duty-readout flex-center" value={data.duty_cycle}/>
-
+        <LedReadout className="duty-readout flex-center" value={data.duty_cycle}/>
+        <Dial className="speed-dial flex-center" value={data.mph} max={45}/>
         {/* <ReactP5Comp className="item2" /> */}
 
       </div>
