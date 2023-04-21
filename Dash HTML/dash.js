@@ -33,7 +33,6 @@ const LedReadout = (p) => {
   p.setup = () => {
     let canvas = p.createCanvas(400, 400, p.WEBGL);
     canvas.parent('led-readout');
-    
   };
 
   p.draw = () => {
@@ -67,6 +66,6 @@ const ClockSketch = (p) => {
 
 function onload() {
   new p5(LedSketch)
-  //new p5(LedReadout)
+  new p5(LedReadout)
   //new p5(ClockSketch)
 }

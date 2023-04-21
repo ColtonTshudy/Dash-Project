@@ -131,6 +131,7 @@ class Canner:
 
 
 # TEST FUNCTION
+# prints vesc can data to console
 if __name__ == '__main__':
     canner = Canner()
     while True:

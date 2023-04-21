@@ -27,4 +27,4 @@ def get_data():
     return Response('success')
 
 
-app.run(debug=True, threaded=True)
+app.run(debug=True, port=5001, threaded=True)

@@ -39,6 +39,12 @@ body {
   position: relative;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .item {
   position: absolute;
   top:50px;
@@ -66,4 +72,9 @@ body {
 
 .rawtext {
   font-size: 20px;
+}
+
+.duty-readout {
+  position: absolute;
+  left: calc(1024px - 100px);
 }

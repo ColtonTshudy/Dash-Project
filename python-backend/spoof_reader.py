@@ -52,7 +52,7 @@ class Canner:
             "erpm": (i*100 % 40000)-10000,
             "rpm": ((i*100 % 40000)-10000)/self.config['mot_poles'],
             "motor_current": i % 300-150,
-            "duty_cycle": i/100 % 1,
+            "duty_cycle": i/100 % 2 - 1,
             "ah_consumed": i/500 % 16,
             "ah_regen": i/2000 % 16,
             "wh_consumed": i/2 % 800,
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     import requests
 
     canner = Canner()
-    url = "http://127.0.0.1:5000"
+    url = "http://127.0.0.1:5001"
     i = 0
 
     # MAIN LOOP
@@ -110,5 +110,5 @@ if __name__ == "__main__":
                 print(can_data)
             except requests.exceptions.RequestException:
                 print('No server response')
-        time.sleep(0.1)
-        i += 2
+        time.sleep(0.05)
+        i += 1

@@ -1,5 +1,7 @@
 import React, { Component, createRef } from "react";
 import p5 from 'p5'
+import vert from '../shaders/shader.vert'
+import frag from '../shaders/led_readout.frag'
 
 // WEBGL
 
@@ -9,7 +11,7 @@ class P5Comp extends Component {
       */
     static defaultProps = {
         className: "",
-        fragShader: undefined,
+        value: 0,
     };
 
     /**
@@ -18,26 +20,34 @@ class P5Comp extends Component {
     constructor(props) {
         super(props);
         this.myRef = createRef()  //createRef() provides a way to integrate third-party DOM elements into our React app.// Check https://reactjs.org/docs/refs-and-the-dom.html for more detail.
-        this.state = { className: this.props.className, fragShader: this.props.fragShader }
+        this.extraClass = ''
     }
 
-    // We define our sketch here
-    // Our sketch is a function object that gets a reference to the P5 object
-    // With this we can call all the function inside our sketch
-    // We call this function object when initializing new p5 object.
+    // Defining the sketch
     Sketch = (p) => {
         p.preload = () => {
-            if (!(this.state.fragShader === ""))
-                this.shader = p.loadShader('/shaders/shader.vert', this.state.fragShader);
+            this.shader = p.loadShader(vert, frag);
         }
         p.setup = () => {
-            this.canvas = p.createCanvas(100, 100, p.WEBGL)
+            this.canvas = p.createCanvas(100, 600, p.WEBGL)
         }
         p.draw = () => {
-            if (!(this.state.fragShader === "")) {
-                this.shader.setUniform("u_time",p.frameCount)
+            let value = this.props.value
+            if (this.props.value < 0){
+                this.extraClass = 'rotate-180'
+                value = -value
             }
-            p.background(p.frameCount % 255)
+            else
+                this.extraClass = ''
+
+            p.shader(this.shader)
+            this.shader.setUniform("u_value", value)
+            this.shader.setUniform("u_resolution", [p.width * p.pixelDensity(), p.height * p.pixelDensity()])
+            p.rect(0, 0, p.width, p.height)
+            if (this.props.value < 0)
+                this.extraClass = 'rotate-180'
+            else
+                this.extraClass = ''
         }
     }
 
@@ -50,7 +60,7 @@ class P5Comp extends Component {
     render() {
         // The render method is being called first and then the componentDidmount will be called.
         return (
-            <div ref={this.myRef} className={this.state.className}></div>
+            <div ref={this.myRef} className={`${this.props.className} ${this.extraClass}`}></div>
         );
     }
 }
