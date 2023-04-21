@@ -6,43 +6,21 @@ import LedReadout from './components/led-readout.js';
 import Speedometer from './components/speedMeter.js'
 // import ReactP5Comp from './components/react_p5.js';
 
+// Connect to socket
+const url = "http://localhost:5001/"
+const socket = io(url)
+
 function App() {
-  const [socketInstance, setSocketInstance] = useState('')
   const [data, setData] = useState({})
   const [count, setCount] = useState({ count: 0 })
 
-  const url = "http://localhost:5001/"
-
-  // Handles setup of the socket object
-  useEffect(() => {
-    const socket = io(url, {
-      transports: ["websocket"],
-      cors: {
-        origin: "http://localhost:3000/",
-      },
-    });
-
-    setSocketInstance(socket);
-
-    socket.on('connect', (msg) => {
-      console.log(msg)
-    })
-    socket.on('get-data', (can_data) => {
-      setData(can_data)
-    })
-    socket.on('disconnect', (msg) => {
-      console.log(msg)
-    })
-
-    return () => {
-      socket.disconnect();
-    }
-  }, [])
+  // Setting up socket details
+  socket.on('connect', (msg) => { console.log(msg) });
+  socket.on('data', (can_data) => { setData(can_data); });
 
   useEffect(() => {
-    if(socketInstance !== '')
-      socketInstance.emit('get-data')
-    
+    console.log('updated')
+    socket.emit('get_data');
     const retryTimeId = setTimeout(() => {
       setCount(prevState => ({ count: prevState.count + 1 }))
     }, 10000) //retry every 10 seconds

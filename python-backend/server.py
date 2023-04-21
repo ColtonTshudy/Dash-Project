@@ -32,8 +32,7 @@ def store_data():
 
 @socket.on("connect")
 def connected():
-    print(request.sid)
-    print('client has connected')
+    print(f'client {request.sid} has connected')
     emit("connect", {'data': f'id: {request.sid} is connected'})
 
 
