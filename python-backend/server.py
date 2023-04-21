@@ -7,6 +7,7 @@ __status__ = "Prototyping"
 
 from flask import Flask, Response, request
 from flask_cors import CORS
+from waitress import serve
 
 # FLASK SERVER
 app = Flask(__name__)
@@ -27,4 +28,5 @@ def get_data():
     return Response('success')
 
 
-app.run(debug=True, port=5001, threaded=True)
+#app.run(debug=True, port=5001, threaded=True)
+serve(app, host='0.0.0.0', port=5001)

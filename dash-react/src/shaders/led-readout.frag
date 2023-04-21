@@ -26,8 +26,8 @@ float pModInterval1(inout float p, float size, float start, float stop) {
 void main()
 {
     // SETTINGS (defaults commented)
-    float scale = 1.0; //1.0
-    float zoom = 10.; //5.0
+    float scale = 1.4; //1.0
+    float zoom = 5.; //5.0
     float numLeds = 9.0; //9.0 Odd numbers only
     float spacing = 0.7; //0.7
     float size = .25; //0.25

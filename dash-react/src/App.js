@@ -46,7 +46,7 @@ function App() {
         <LedReadout className="duty-readout flex-center" value={data.duty_cycle} max={1}/>
         {/* <Dial className="speed-dial flex-center" value={data.mph} max={45}/> */}
         {/* <ReactP5Comp className="item2" /> */}
-        <Speedometer id="test" className="speed-dial flex-center" value={data.mph}/>
+        {/* <Speedometer id="test" className="speed-dial flex-center" value={data.mph}/> */}
 
       </div>
     </div>
