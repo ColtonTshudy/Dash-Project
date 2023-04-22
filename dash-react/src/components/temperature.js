@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { RadialGauge } from 'canvas-gauges';
+import { LinearGauge } from 'canvas-gauges';
 
 const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => {
     const canvasRef = useRef();
@@ -7,36 +7,40 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
     const danger = 0.5; // Start making number red at this percent
 
     useEffect(() => {
-        gaugeRef.current = new RadialGauge({
+        gaugeRef.current = new LinearGauge({
             renderTo: canvasRef.current,
-            width: size,
+            width: size/2,
             height: size,
             minValue: min,
             maxValue: max,
             value: value,
             units: '°C',
             title: title,
-            highlights: [
-                {
-                    "from": max*danger,
-                    "to": max,
-                    "color": "rgba(255, 0, 0, .2)"
-                }
-            ],
-            majorTicks: __linspace(min, max, ticks),
+            fontTitleSize: 50,
+            fontTitleStyle: 'bold',
+            highlights: [],
+            majorTicks: [0],
             minorTicks: 2,
-            needleType: "arrow",
-            colorNeedle: "red",
-            colorNeedleEnd: "red",
+            colorMajorTicks: 'rgb(0,0,0,0)',
+            borders: false,
+            colorPlate: 'rgb(0,0,0,0)',
+
             colorValueBoxBackground: `rgb(255,${255*(max*danger)/value},${255*(max*danger)/value})`,
-            fontValueSize: 60,
+            fontValueSize: 50,
             fontNumbersSize: 25,
+            valueBoxStroke: 0,
             valueInt: 2,
             valueDec: 0,
+
             colorValueText: 'black',
             fontUnitsSize: 25,
-            fontTitleSize: 30,
-            fontTitleStyle: 'bold'
+            barProgress: true,
+            barStrokeWidth: 0,
+            colorBarProgress: 'red',
+            colorBar: 'rgb(255,255,255,0.5)',
+            needle: true,
+            needleSide: 'right',
+            needleWidth: 2,
         });
         gaugeRef.current.draw();
 

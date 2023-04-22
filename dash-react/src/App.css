@@ -10,7 +10,7 @@ body {
 .viewport {
   width: 1024px;
   height: 600px;
-  background: black;
+  background: rgb(33, 44, 56);
   color: white;
   overflow: hidden;
   position: relative;
@@ -97,20 +97,20 @@ body {
 
 .motor-temp {
   position: absolute;
-  right: 100px;
-  top: 0px;
+  right: -20px;
+  bottom: 0px;
 }
 
 .mosfet-temp {
   position: absolute;
-  right: 100px;
-  bottom: 225px;
+  right: 40px;
+  bottom: 0px;
 }
 
 .speedometer {
   position: absolute;
-  left: -260px;
-  bottom: -12.5px;
+  left: 50%;
+  top: 47%;
   opacity: 1;
 }
 
@@ -128,10 +128,21 @@ body {
 
 .battery-voltage {
   position:absolute;
-  left: 300px;
-  top: 0px;
+  right: 0px;
+  top: 50px;
   background-color: black;
-  border-radius: 50%;
-  border: solid white;
-  width:180px;
+  border-radius: 30%/30%;
+  border: 2px solid white;
+}
+
+.speed-readout {
+  position:absolute;
+  left: 50%;
+  top: 47%;
+}
+
+.clock {
+  position:absolute;
+  bottom: 0px;
+  left: 50%;
 }

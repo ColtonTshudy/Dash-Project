@@ -8,7 +8,7 @@ const Speedometer = ({ className, value, title, min, max, ticks, size}) => {
 
     useEffect(() => {
         gaugeRef.current = new RadialGauge({
-            barStartPosition: 'right',
+            barStartPosition: 'left',
             renderTo: canvasRef.current,
             width: size,
             height: size,
@@ -18,13 +18,16 @@ const Speedometer = ({ className, value, title, min, max, ticks, size}) => {
             units: 'MPH',
             title: title,
             highlights: [],
-            majorTicks: __linspace(max, min, ticks),
+            majorTicks: __linspace(min, max , ticks),
             minorTicks: 5,
-            needleType: "arrow",
-            needleWidth: 5,
-            colorNeedle: "red",
-            colorNeedleEnd: "red",
+            needleType: "line",
+            needleWidth: 3,
+            colorNeedle: "rgb(255,0,0,1)",
+            colorNeedleEnd: "rgb(255,0,0,1)",
+            needleStart: 80,
+            needleEnd: 100,
             colorValueBoxBackground: 'white',
+            colorPlate: 'rgb(240,255,255,1)',
             fontValueSize: 60,
             fontNumbersSize: 25,
             valueInt: 2,
@@ -33,12 +36,15 @@ const Speedometer = ({ className, value, title, min, max, ticks, size}) => {
             fontUnitsSize: 25,
             fontTitleSize: 30,
             fontTitleStyle: 'bold',
-            ticksAngle: 180,
-            startAngle: 180,
+            ticksAngle: 270,
+            startAngle: 45,
             valueBox: false,
-            borders: false,
+            borders: true,
             borderShadowWidth: 0,
-            exactTicks: false
+            exactTicks: false,
+            needleCircleSize: 60,
+            needleCircleInner: 0,
+            colorNeedleCircleOuter: 'rgb(33, 44, 56)',
         });
         gaugeRef.current.draw();
 
@@ -48,7 +54,7 @@ const Speedometer = ({ className, value, title, min, max, ticks, size}) => {
     }, [value]);
 
     return (
-        <div className={className}>
+        <div className={className} style={{margin: `${-size/2}px 0 0 ${-size/2}px`}}>
             <canvas ref={canvasRef} />
         </div>
     )
