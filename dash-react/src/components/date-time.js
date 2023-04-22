@@ -13,7 +13,7 @@ export const DateTime = ({ className }) => {
 
     return (
         <div className={className}>
-            <label> Time : {date.toLocaleTimeString()}</label>
+            <label>{`${date.toLocaleTimeString()}`}</label>
         </div>
     )
 }

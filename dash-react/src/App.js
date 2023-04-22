@@ -6,6 +6,11 @@ import Speedometer from './components/speedometer.js'
 import PowerInfo from './components/power-info.js'
 import SevenSegment from './components/seven-segment';
 import DateTime from './components/date-time.js';
+import './fonts/led_counter-7/led_counter-7.ttf'
+import motorIcon from './images/motor.png'
+import mosfetIcon from './images/mosfet.jpg'
+import Odometer from 'react-odometerjs'
+import "./odometer-style.css";
 
 function App() {
 
@@ -44,15 +49,20 @@ function App() {
 
                 {Object.entries(data).map(([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value * 100) / 100}</label>)}
 
-
                 <TemperatureGauge value={data.mot_temp} className="motor-temp flex-center" title="Motor" min={0} max={100} ticks={5} size={200} />
-                <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" title="Mosfet" min={0} max={100} ticks={5} size={150} />
+                <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" title="Mosfet" min={0} max={100} ticks={5} size={200} />
                 <Speedometer value={Math.abs(data.mph)} className="speedometer flex-center" title="" min={0} max={50} ticks={11} size={550} />
                 <PowerInfo data={data} classname="power-info" />
-                <DateTime className="clock" />
+                
+                <DateTime className="clock font-face-led" />
 
                 <SevenSegment className="battery-voltage flex-center" value={data.battery_voltage} max={80} height={100} width={100} color='white' scale={0.7} />
                 <SevenSegment className="speed-readout flex-center" value={data.mph} max={data.mph} height={175} width={300} color='white' scale={0.7} />
+            
+                <img  src={motorIcon} id="motor-icon"/>
+                <img  src={mosfetIcon} id="mosfet-icon"/>
+                
+                <Odometer id="odometer" value={data.odometer}/>
             </div>
         </div>
     );
