@@ -1,11 +1,11 @@
 import React, { Component, createRef } from "react";
 import p5 from 'p5'
 import vert from '../shaders/shader.vert'
-import frag from '../shaders/circle-progress.frag'
+import frag from '../shaders/circle-progress2.frag'
 
 // WEBGL
 
-class P5Comp extends Component {
+class Dial extends Component {
     /**
       * Default props
       */
@@ -58,4 +58,4 @@ class P5Comp extends Component {
 }
 
 
-export default P5Comp
+export default Dial

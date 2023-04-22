@@ -4,16 +4,17 @@
  */
 
 body {
-  background: black;
+  background: white;
 }
 
 .viewport {
   width: 1024px;
   height: 600px;
-  background: white;
-  color: black;
+  background: black;
+  color: white;
   overflow: hidden;
   position: relative;
+  border: 5px dashed greenyellow;
 }
 
 .center-screen {
@@ -39,6 +40,15 @@ body {
   position: relative;
 }
 
+.flex-column {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: relative;
+}
+
 .flex-center {
   display: flex;
   align-items: center;
@@ -47,7 +57,7 @@ body {
 
 .item {
   position: absolute;
-  top:50px;
+  top: 50px;
   left: 50px;
   background: green;
 }
@@ -83,4 +93,45 @@ body {
   position: absolute;
   left: 400px;
   top: 400px;
+}
+
+.motor-temp {
+  position: absolute;
+  right: 100px;
+  top: 0px;
+}
+
+.mosfet-temp {
+  position: absolute;
+  right: 100px;
+  bottom: 225px;
+}
+
+.speedometer {
+  position: absolute;
+  left: -260px;
+  bottom: -12.5px;
+  opacity: 1;
+}
+
+.motor-current {
+  position: absolute;
+  left: 200px;
+  bottom: 200px;
+}
+
+.temporary {
+  position:absolute;
+  left:500px;
+  top: 500px;
+}
+
+.battery-voltage {
+  position:absolute;
+  left: 300px;
+  top: 0px;
+  background-color: black;
+  border-radius: 50%;
+  border: solid white;
+  width:180px;
 }

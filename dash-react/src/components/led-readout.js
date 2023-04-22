@@ -2,7 +2,6 @@ import React, { Component, createRef } from "react";
 import p5 from 'p5'
 import vert from '../shaders/shader.vert'
 import frag from '../shaders/led-readout.frag'
-
 // WEBGL
 
 class LedReadout extends Component {
@@ -12,6 +11,7 @@ class LedReadout extends Component {
     static defaultProps = {
         className: "",
         value: 0,
+        vertical: false,
     };
 
     /**
@@ -25,7 +25,9 @@ class LedReadout extends Component {
 
     // Defining the sketch
     Sketch = (p) => {
+        let i = 0
         p.preload = () => {
+
             this.shader = p.loadShader(vert, frag);
         }
         p.setup = () => {
@@ -33,7 +35,7 @@ class LedReadout extends Component {
         }
         p.draw = () => {
             let value = this.props.value
-            if (this.props.value < 0){
+            if (this.props.value < 0) {
                 this.extraClass = 'rotate-180'
                 value = -value
             }
@@ -41,9 +43,11 @@ class LedReadout extends Component {
                 this.extraClass = ''
 
             p.shader(this.shader)
-            this.shader.setUniform("u_value", value/this.props.max)
+            this.shader.setUniform("u_time", i/1000)
+            this.shader.setUniform("u_value", value / this.props.max)
             this.shader.setUniform("u_resolution", [p.width * p.pixelDensity(), p.height * p.pixelDensity()])
             p.rect(0, 0, p.width, p.height)
+            i++
         }
     }
 

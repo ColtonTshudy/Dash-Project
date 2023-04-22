@@ -3,6 +3,7 @@
 
 precision mediump float;
 
+uniform float u_time;
 uniform float u_value;
 uniform vec2 u_resolution;
 varying vec2 vectorCoord;
@@ -31,6 +32,7 @@ void main()
     float numLeds = 9.0; //9.0 Odd numbers only
     float spacing = 0.7; //0.7
     float size = .25; //0.25
+    float glow = 4.0; // 0.0
 
     vec2 uv = scale*(gl_FragCoord.xy -.5* u_resolution.xy)/u_resolution.y;
     vec3 p=vec3(0);
@@ -40,8 +42,8 @@ void main()
     vec3 act = vec3(.45,.55,1.); //on color
     float st = mod(u_value*10.,numLeds+1.); //keeps time within scope of number of leds
     float e=0.;
-    float g=0.;
-    for(float i=1.;i<10.;i++){
+    float g=glow;
+    for(float i=1.;i<9.;i++){
             p = d*g;
             // p.x for horizontal: change to p.y for vertical
             float idx  = pModInterval1(p.y,spacing,0.-floor(numLeds/2.),0.+floor(numLeds/2.));
