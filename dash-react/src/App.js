@@ -9,8 +9,6 @@ import DateTime from './components/date-time.js';
 import './fonts/led_counter-7/led_counter-7.ttf'
 import motorIcon from './images/motor.png'
 import mosfetIcon from './images/mosfet.jpg'
-import Odometer from 'react-odometerjs'
-import "./odometer-style.css";
 
 function App() {
 
