@@ -43,7 +43,7 @@ class LedReadout extends Component {
                 this.extraClass = ''
 
             p.shader(this.shader)
-            this.shader.setUniform("u_time", i/1000)
+            this.shader.setUniform("u_time", i / 1000)
             this.shader.setUniform("u_value", value / this.props.max)
             this.shader.setUniform("u_resolution", [p.width * p.pixelDensity(), p.height * p.pixelDensity()])
             p.rect(0, 0, p.width, p.height)

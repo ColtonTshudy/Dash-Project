@@ -135,10 +135,10 @@ body {
   border: 2px solid white;
 }
 
-.speed-readout {
+.center-gauge {
   position:absolute;
-  left: 50%;
   top: 47%;
+  left: 50%;
 }
 
 .clock {
@@ -173,6 +173,12 @@ body {
   font-size: 40px;
 }
 
+#battery-amps {
+  
+}
+
+
+
 
 
 
@@ -180,8 +186,18 @@ body {
   font-family: "led_counter-7";
  }
 
+ .font-face-rubik {
+  font-family: "Rubik";
+ }
+
  @font-face {
   font-family: "led_counter-7";
   src: local("led_counter-7"),
       url("./fonts/led_counter-7/led_counter-7.ttf") format("truetype");
+ }
+
+ @font-face {
+  font-family: "Rubik";
+  src: local("Rubik"),
+      url("./fonts/Rubik/static/Rubik-MediumItalic.ttf") format("truetype");
  }
