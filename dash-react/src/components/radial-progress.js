@@ -39,14 +39,16 @@ const RadialBar = ({
     className,
     start,
     end,
+    inverse,
 }) => {
-    const percentage = value / max * 100;
+    const percentage = value / max;
     const PI = 3.14
     const R = (width-strokeWidth)/2
 
     let circumference = 2 * PI * R
-    let offset = circumference - percentage / 100 * circumference
-    let gradientId = `${primaryColor[0]}${primaryColor[1]}`.replace(/#/g, '')
+    let offset = circumference - percentage * circumference
+    console.log(`${primaryColor[0]}${primaryColor[1]}`)
+    let gradientId = `${primaryColor[0]}${primaryColor[1]}`
 
     return (
         <div id={id} className={className} style={{margin: `${-width/2}px 0 0 ${-width/2}px`}}>
@@ -67,19 +69,21 @@ const RadialBar = ({
                         x1='0%'
                         y1='0%'
                         x2='100%'
-                        y2='100%'
+                        y2='0%'
                     >
                         <stop offset='0%' stopColor={primaryColor[0]} />
                         <stop offset='100%' stopColor={primaryColor[1]} />
                     </linearGradient>
-                    <circle
+                    <StyledCircle
                         strokeWidth={strokeWidth}
-                        fill='transparent'
+                        fill={fill}
                         r={R}
                         cx={width / 2}
                         cy={width / 2}
-                        stroke={secondaryColor}
-                        strokeDasharray={`${circumference} ${circumference}`}
+                        stroke={'rgb(0,0,0,.4)'}
+                        strokeLinecap={strokeLinecap}
+                        strokeDasharray={`${circumference*(end-start)} ${circumference}`}
+                        strokeDashoffset={-circumference*start}
                     />
                     <StyledCircle
                         strokeWidth={strokeWidth}
@@ -89,8 +93,8 @@ const RadialBar = ({
                         cy={width / 2}
                         stroke={`url(#${gradientId})`}
                         strokeLinecap={strokeLinecap}
-                        strokeDasharray={`${circumference} ${circumference}`}
-                        strokeDashoffset={offset}
+                        strokeDasharray={`${percentage*circumference*(end-start)} ${circumference}`}
+                        strokeDashoffset={-circumference*start}
                     />
                 </svg>
             </CircleContainer>
