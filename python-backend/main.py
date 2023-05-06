@@ -9,7 +9,7 @@ import can_reader
 import requests
 
 canner = can_reader.Canner()
-url = 'http://127.0.0.1:5000'
+url = 'http://127.0.0.1:5001'
 
 ### MAIN LOOP
 while True:
