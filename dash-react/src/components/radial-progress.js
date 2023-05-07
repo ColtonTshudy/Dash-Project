@@ -28,8 +28,9 @@ const StyledCircle = styled.circle`
 
 const RadialBar = ({
     value,
+    min = 0,
     max,
-    width,
+    radius,
     strokeWidth,
     primaryColor,
     secondaryColor,
@@ -39,24 +40,29 @@ const RadialBar = ({
     className,
     start,
     end,
-    inverse,
 }) => {
-    const percentage = value / max;
+    const percentage = Math.abs((value-min) / (max-min));
     const PI = 3.14
-    const R = (width-strokeWidth)/2
+    const R = (radius-strokeWidth)/2
+
+    let color = []
+    if (value >= 0)
+        color = primaryColor
+    else 
+        color = secondaryColor
 
     let circumference = 2 * PI * R
     let offset = circumference - percentage * circumference
-    console.log(`${primaryColor[0]}${primaryColor[1]}`)
-    let gradientId = `${primaryColor[0]}${primaryColor[1]}`
+    console.log(`${color[0]}${color[1]}`)
+    let gradientId = `${color[0]}${color[1]}`
 
     return (
-        <div id={id} className={className} style={{margin: `${-width/2}px 0 0 ${-width/2}px`}}>
+        <div id={id} className={className} style={{margin: `${-radius/2}px 0 0 ${-radius/2}px`}}>
             <CircleContainer
                 className="react-super-progressbar__base"
                 style={{
-                    height: `${width}px`,
-                    width: `${width}px`,
+                    height: `${radius}px`,
+                    width: `${radius}px`,
                 }}
             >
 
@@ -71,15 +77,15 @@ const RadialBar = ({
                         x2='100%'
                         y2='0%'
                     >
-                        <stop offset='0%' stopColor={primaryColor[0]} />
-                        <stop offset='100%' stopColor={primaryColor[1]} />
+                        <stop offset='0%' stopColor={color[0]} />
+                        <stop offset='100%' stopColor={color[1]} />
                     </linearGradient>
                     <StyledCircle
                         strokeWidth={strokeWidth}
                         fill={fill}
                         r={R}
-                        cx={width / 2}
-                        cy={width / 2}
+                        cx={radius / 2}
+                        cy={radius / 2}
                         stroke={'rgb(0,0,0,.4)'}
                         strokeLinecap={strokeLinecap}
                         strokeDasharray={`${circumference*(end-start)} ${circumference}`}
@@ -89,8 +95,8 @@ const RadialBar = ({
                         strokeWidth={strokeWidth}
                         fill={fill}
                         r={R}
-                        cx={width / 2}
-                        cy={width / 2}
+                        cx={radius / 2}
+                        cy={radius / 2}
                         stroke={`url(#${gradientId})`}
                         strokeLinecap={strokeLinecap}
                         strokeDasharray={`${percentage*circumference*(end-start)} ${circumference}`}

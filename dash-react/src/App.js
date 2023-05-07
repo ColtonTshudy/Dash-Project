@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-// import LedReadout from './components/led-readout.js';
 import TemperatureGauge from './components/temperature.js';
 import Speedometer from './components/speedometer.js'
 import SevenSegment from './components/seven-segment';
@@ -18,6 +17,7 @@ function App() {
 
     const url = "http://localhost:5001"
 
+    // Get the config from the server
     useEffect(() => {
         fetch(`${url}/config_data`).then(res => {
             if (res.status >= 400) {
@@ -35,6 +35,7 @@ function App() {
             })
     }, [])
 
+    // Get CAN data every 10 milliseconds
     useEffect(() => {
         fetch(`${url}/can_data`).then(res => {
             if (res.status >= 400) {
@@ -61,12 +62,12 @@ function App() {
     return (
         <div className="center-screen">
             <div className="viewport flex-container">
-                <label>Moped Guage App</label>
+                <label className="background">Moped Guage App</label>
 
-                {Object.entries(data).map(([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value * 100) / 100}</label>)}
+                {/* {Object.entries(data).map(([key, value]) => <label key={key} className='rawtext'>{key} = {Math.trunc(value * 100) / 100}</label>)} */}
 
-                <TemperatureGauge value={data.mot_temp} className="motor-temp flex-center" title="Motor" min={0} max={100} ticks={5} size={200} />
-                <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" title="Mosfet" min={0} max={100} ticks={5} size={200} />
+                <TemperatureGauge value={data.mot_temp} className="motor-temp flex-center" min={0} max={100} ticks={5} size={200} />
+                <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" min={0} max={100} ticks={5} size={200} />
                 <Speedometer value={Math.abs(data.mph)} className="speedometer center-gauge" title="" min={0} max={50} ticks={11} size={550} />
 
                 <DateTime className="clock font-face-led" />
@@ -77,8 +78,12 @@ function App() {
                 <img src={motorIcon} id="motor-icon" />
                 <img src={mosfetIcon} id="mosfet-icon" />
 
-                <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} max={150} width={610} strokeWidth={20} start={.6} end={.9} />
-                <RadialBar className="center-gauge" value={data.battery_current} max={80} width={700} strokeWidth={30} start={.62} end={.88} />
+                {/* <RadialBar className="center-gauge mph-progress" value={data.mph} primaryColor={['red','red']} max={50} radius={560} strokeWidth={25} start={0.005} end={0.743} strokeLinecap={'square'}/> */}
+                <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} />
+                <RadialBar className="center-gauge" value={data.battery_current} primaryColor={['orange','yellow']} secondaryColor={['lime', 'green']} max={80} radius={700} strokeWidth={30} start={.62} end={.88} />
+
+                <RadialBar className="center-gauge flip-y" value={data.motor_voltage} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} />
+                <RadialBar className="center-gauge flip-y" value={data.battery_voltage} primaryColor={['lightblue','lightskyblue']} secondaryColor={['lime', 'green']} min={40} max={58.8} radius={700} strokeWidth={30} start={.62} end={.88} />
             </div>
         </div>
     );

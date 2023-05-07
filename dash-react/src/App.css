@@ -5,6 +5,11 @@
 
 body {
   background: white;
+  margin: 0px;
+}
+
+.background {
+  color: rgb(33, 44, 56);
 }
 
 .viewport {
@@ -14,7 +19,6 @@ body {
   color: white;
   overflow: hidden;
   position: relative;
-  border: 5px dashed greenyellow;
 }
 
 .center-screen {
@@ -154,7 +158,7 @@ body {
   height: 50px;
   filter:invert(100%);
   right:10px;
-  bottom:180px;
+  bottom:380px;
 }
 
 #mosfet-icon{
@@ -163,7 +167,7 @@ body {
   height: 50px;
   filter: invert(100%);
   right:67px;
-  bottom:180px;
+  bottom:380px;
 }
 
 #odometer {
@@ -179,6 +183,15 @@ body {
 
  .font-face-rubik {
   font-family: "Rubik";
+ }
+
+ .mph-progress {
+  rotate: -135deg;
+  translate: 1px -2px;
+ }
+
+ .flip-y {
+  transform: scaleX(-1);
  }
 
  @font-face {

@@ -10,11 +10,10 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
         gaugeRef.current = new LinearGauge({
             renderTo: canvasRef.current,
             width: size/2,
-            height: size,
+            height: size*2,
             minValue: min,
             maxValue: max,
             value: value,
-            units: '°C',
             title: title,
             fontTitleSize: 50,
             fontTitleStyle: 'bold',
@@ -26,7 +25,7 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
             colorPlate: 'rgb(0,0,0,0)',
 
             colorValueBoxBackground: `rgb(255,${255*(max*danger)/value},${255*(max*danger)/value})`,
-            fontValueSize: 50,
+            fontValueSize: 65,
             fontNumbersSize: 25,
             valueBoxStroke: 0,
             valueInt: 2,
@@ -40,7 +39,7 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
             colorBar: 'rgb(255,255,255,0.5)',
             needle: true,
             needleSide: 'right',
-            needleWidth: 2,
+            needleWidth: 10,
         });
         gaugeRef.current.draw();
 

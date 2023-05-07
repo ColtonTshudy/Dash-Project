@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { RadialGauge } from 'canvas-gauges';
 
-const Speedometer = ({ className, value, title, min, max, ticks, size}) => {
+const Speedometer = ({ className, value, title, min, max, ticks, size }) => {
     const canvasRef = useRef();
     const gaugeRef = useRef();
     const danger = 0.5; // Start making number red at this percent
@@ -21,7 +21,7 @@ const Speedometer = ({ className, value, title, min, max, ticks, size}) => {
             majorTicks: __linspace(min, max , ticks),
             minorTicks: 5,
             needleType: "line",
-            needleWidth: 3,
+            needleWidth: 5,
             colorNeedle: "rgb(255,0,0,1)",
             colorNeedleEnd: "rgb(255,0,0,1)",
             needleStart: 80,
