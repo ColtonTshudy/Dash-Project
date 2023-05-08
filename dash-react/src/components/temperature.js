@@ -35,8 +35,8 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
             fontUnitsSize: 25,
             barProgress: true,
             barStrokeWidth: 0,
-            colorBarProgress: 'red',
-            colorBar: 'rgb(255,255,255,0.5)',
+            colorBarProgress: 'pink',
+            colorBar: 'rgb(255,255,255,0.2)',
             needle: true,
             needleSide: 'right',
             needleWidth: 10,
@@ -46,7 +46,7 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
         return () => {
             gaugeRef.current.destroy();
         };
-    }, [value]);
+    });
 
     return (
         <div className={className}>
@@ -54,14 +54,5 @@ const TemperatureGauge = ({ className, value, title, min, max, ticks, size}) => 
         </div>
     )
 };
-
-function __linspace(startValue, stopValue, cardinality) {
-    var arr = [];
-    var step = (stopValue - startValue) / (cardinality - 1);
-    for (var i = 0; i < cardinality; i++) {
-      arr.push(startValue + (step * i));
-    }
-    return arr;
-  }
 
 export default TemperatureGauge;
