@@ -4,9 +4,9 @@ import TemperatureGauge from './components/temperature.js';
 import Speedometer from './components/speedometer.js'
 import SevenSegment from './components/seven-segment';
 import DateTime from './components/date-time.js';
-import './fonts/led_counter-7/led_counter-7.ttf'
-import motorIcon from './images/motor.png'
-import mosfetIcon from './images/mosfet.jpg'
+import './fonts/led_counter-7/led_counter-7.ttf';
+import motorIcon from './images/motor.png';
+import mosfetIcon from './images/mosfet.jpg';
 import RadialBar from './components/radial-progress';
 
 function App() {
@@ -80,10 +80,10 @@ function App() {
 
                 {/* <RadialBar className="center-gauge mph-progress" value={data.mph} primaryColor={['red','red']} max={50} radius={560} strokeWidth={25} start={0.005} end={0.743} strokeLinecap={'square'}/> */}
                 <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} />
-                <RadialBar className="center-gauge" value={data.battery_current} primaryColor={['orange','yellow']} secondaryColor={['lime', 'green']} max={80} radius={700} strokeWidth={30} start={.62} end={.88} />
+                <RadialBar className="center-gauge" value={data.battery_current} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} max={80} radius={700} strokeWidth={30} start={.63} end={.87} />
 
                 <RadialBar className="center-gauge flip-y" value={data.motor_voltage} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} />
-                <RadialBar className="center-gauge flip-y" value={data.battery_voltage} primaryColor={['lightblue','lightskyblue']} secondaryColor={['lime', 'green']} min={40} max={58.8} radius={700} strokeWidth={30} start={.62} end={.88} />
+                <RadialBar className="center-gauge flip-y" value={data.battery_voltage} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} min={40} max={58.8} radius={700} strokeWidth={30} start={.63} end={.87} />
             </div>
         </div>
     );

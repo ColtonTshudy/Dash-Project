@@ -45,6 +45,7 @@ const Speedometer = ({ className, value, title, min, max, ticks, size }) => {
             needleCircleSize: 60,
             needleCircleInner: 0,
             colorNeedleCircleOuter: 'rgb(33, 44, 56)',
+            colorNeedleCircleOuterEnd: 'gray',
         });
         gaugeRef.current.draw();
 
