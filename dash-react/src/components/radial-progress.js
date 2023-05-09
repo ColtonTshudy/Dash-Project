@@ -7,17 +7,7 @@ const CircleContainer = styled.div`
   border-radius: 100%;
   position: relative;`
 
-const PercentageContainer = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center,`
+
 
 const StyledCircle = styled.circle`
   transform: rotate(-90deg);
@@ -27,8 +17,8 @@ const StyledCircle = styled.circle`
 // const StyledCircle = ({ children, ...props }) => <circle className="react-super-progressbar__styled-circle" {...props}>{children}</circle>
 
 const RadialBar = ({
-    value,
     min = 0,
+    value = min,
     max,
     radius,
     strokeWidth,
@@ -52,8 +42,6 @@ const RadialBar = ({
         color = secondaryColor
 
     let circumference = 2 * PI * R
-    let offset = circumference - percentage * circumference
-    console.log(`${color[0]}${color[1]}`)
     let gradientId = `${color[0]}${color[1]}`
 
     return (
@@ -117,7 +105,7 @@ RadialBar.propTypes = {
     fontColor: PropTypes.string,
     fontFamily: PropTypes.string,
     primaryColor: PropTypes.array,
-    secondaryColor: PropTypes.string,
+    secondaryColor: PropTypes.array,
     fill: PropTypes.string,
     hidePercentageText: PropTypes.bool,
 }

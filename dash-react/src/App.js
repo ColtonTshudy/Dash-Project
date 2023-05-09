@@ -27,7 +27,7 @@ function App() {
         })
             .then(
                 data => {
-                    setConfig(data)
+                    setConfig(data['DASH_SETTINGS'])
                 }
             )
             .catch(err => {
@@ -68,15 +68,15 @@ function App() {
 
                 <TemperatureGauge value={data.mot_temp} className="motor-temp flex-center" min={0} max={100} ticks={5} size={200} />
                 <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" min={0} max={100} ticks={5} size={200} />
-                <Speedometer value={Math.abs(data.mph)} className="speedometer center-gauge" title="" min={0} max={50} ticks={11} size={550} />
+                <Speedometer value={Math.abs(data.mph)} className="speedometer center-gauge" title="" min={0} max={config.max_speed} ticks={11} size={550} />
 
                 <DateTime className="clock font-face-led" />
 
-                <SevenSegment className="battery-voltage flex-center" value={data.battery_voltage} max={80} height={100} width={100} color='red' scale={0.7} />
+                <SevenSegment className="battery-voltage flex-center" value={data.battery_voltage} decimals={1} max={80} height={100} width={170} color='red' scale={0.7} />
                 <SevenSegment className="center-gauge flex-center" value={data.mph} max={data.mph} height={125} width={300} color='white' scale={1.0} />
 
-                <img src={motorIcon} id="motor-icon" />
-                <img src={mosfetIcon} id="mosfet-icon" />
+                <img src={motorIcon} id="motor-icon" alt="motor temp icon"/>
+                <img src={mosfetIcon} id="mosfet-icon" alt="mosfet temp icon"/>
 
                 {/* <RadialBar className="center-gauge mph-progress" value={data.mph} primaryColor={['red','red']} max={50} radius={560} strokeWidth={25} start={0.005} end={0.743} strokeLinecap={'square'}/> */}
                 <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} />
