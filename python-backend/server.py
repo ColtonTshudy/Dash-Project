@@ -7,9 +7,8 @@ __status__ = "Prototyping"
 
 from flask import Flask, Response, request
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
-
 from waitress import serve
+
 
 # CONFIG DATA
 import os
@@ -30,14 +29,11 @@ for section in parser.sections():
 
 # FLASK SERVER
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'
-CORS(app, resources={r"/*": {"origins": "*"}})
-socket = SocketIO(app, cors_allowed_origins="*")
-
+CORS(app)
 
 can_data_dict = None
 
-### HTML REQUESTS
+
 @app.route("/can_data")
 def can_data():
     global can_data_dict
@@ -48,6 +44,7 @@ def config():
     global config_dict
     return config_dict
 
+
 @app.route('/', methods=['POST'])
 def get_data():
     global can_data_dict
@@ -55,25 +52,6 @@ def get_data():
     # print(f'Recieved from client: {can_data_dict}')
     return Response('success')
 
-### WEBSOCKET
-@socket.on("connect")
-def connected():
-    # print(request.sid)
-    # print('client has connected')
-    emit("connect", {'data': f'id: {request.sid} is connected'})
-
-
-@socket.on('get_data')
-def send_data():
-    global can_data_dict
-    emit('data', can_data_dict, broadcast=True)
-
-
-@socket.on('disconnect')
-def disconnected():
-    # print("user disconnected")
-    emit("disconnect", f"user {request.sid} disconnected", broadcast=True)
-
 
 #app.run(debug=True, port=5001, threaded=True)
-socket.run(app, port=5001)
+serve(app, host='0.0.0.0', port=5001)

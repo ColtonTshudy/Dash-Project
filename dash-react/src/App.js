@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { io } from "socket.io-client";
 
 import TemperatureGauge from './components/temperature.js';
 import Speedometer from './components/speedometer.js'
@@ -10,21 +9,16 @@ import motorIcon from './images/motor.png';
 import mosfetIcon from './images/mosfet.jpg';
 import RadialBar from './components/radial-progress';
 
-// Connect to socket
 const url = "http://localhost:5001/"
-const socket = io(url)
 
 function App() {
 
     const [data, setData] = useState({})
     const [config, setConfig] = useState({})
+    const [fetchCount, setFetchCount] = useState({})
 
     // Get the config from the server
     useEffect(() => {
-        // Setting up socket details
-        socket.on('connect', (msg) => { console.log(msg) });
-        socket.on('data', (can_data) => { setData(can_data); });
-
         fetch(`${url}/config_data`).then(res => {
             if (res.status >= 400) {
                 throw new Error("Server responds with error!");
@@ -39,18 +33,31 @@ function App() {
             .catch(err => {
                 console.log(err)
             })
-
-        // On unmount
-        return () => {
-            console.log('disconnected')
-            socket.disconnect()
-        }
     }, [])
 
-    // Request CAN data whenever new data is recieved
+    // Get CAN data every 1000 milliseconds
     useEffect(() => {
-        socket.emit('get_data');
-    }, [data])
+        fetch(`${url}/can_data`).then(res => {
+            if (res.status >= 400) {
+                throw new Error("Server responds with error!");
+            }
+            return res.json()
+        })
+            .then(
+                data => {
+                    setData(data)
+                }
+            )
+            .catch(err => {
+                console.log(err)
+            })
+        const fetchTimeId = setTimeout(() => {
+            setFetchCount(prevState => ({ count: prevState.count + 1 }))
+        }, 1000) //fetch normally every 1000 ms
+        return () => {
+            clearTimeout(fetchTimeId) //reset fetch timer
+        }
+    }, [fetchCount])
 
     return (
         <div className="center-screen">
