@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { io } from "socket.io-client";
 import TemperatureGauge from './components/temperature.js';
 import Speedometer from './components/speedometer.js'
 import SevenSegment from './components/seven-segment';
@@ -9,13 +10,24 @@ import motorIcon from './images/motor.png';
 import mosfetIcon from './images/mosfet.jpg';
 import RadialBar from './components/radial-progress';
 
+// Connect to socket
+const url = "http://localhost:5001/"
+const socket = io(url)
+
 function App() {
 
     const [data, setData] = useState({})
-    const [fetchCount, setFetchCount] = useState({ count: 0 })
     const [config, setConfig] = useState({})
 
-    const url = "http://localhost:5001"
+    // Setting up socket details
+    socket.on('connect', (msg) => { console.log(msg) });
+    socket.on('data', (can_data) => { setData(can_data); });
+
+    // Get CAN data whenever possible
+    useEffect(() => {
+        console.log('updated')
+        socket.emit('get_data');
+    }, [data])
 
     // Get the config from the server
     useEffect(() => {
@@ -34,30 +46,6 @@ function App() {
                 console.log(err)
             })
     }, [])
-
-    // Get CAN data every 10 milliseconds
-    useEffect(() => {
-        fetch(`${url}/can_data`).then(res => {
-            if (res.status >= 400) {
-                throw new Error("Server responds with error!");
-            }
-            return res.json()
-        })
-            .then(
-                data => {
-                    setData(data)
-                }
-            )
-            .catch(err => {
-                console.log(err)
-            })
-        const fetchTimeId = setTimeout(() => {
-            setFetchCount(prevState => ({ count: prevState.count + 1 }))
-        }, 10) //fetch normally every 10 ms
-        return () => {
-            clearTimeout(fetchTimeId) //reset fetch timer
-        }
-    }, [fetchCount])
 
     return (
         <div className="center-screen">
