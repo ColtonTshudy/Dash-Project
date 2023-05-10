@@ -23,7 +23,7 @@ function App() {
     useEffect(() => {
         // Setting up socket details
         socket.on('connect', (msg) => { console.log(msg) });
-        socket.on('data', (can_data) => { console.log('recieved data'); setData(can_data); });
+        socket.on('data', (can_data) => { setData(can_data); });
 
         fetch(`${url}/config_data`).then(res => {
             if (res.status >= 400) {
