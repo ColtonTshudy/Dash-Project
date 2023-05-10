@@ -92,7 +92,8 @@ class Canner:
                 self.data['battery_voltage'] = ((buf[4] << 8) + buf[5])/10
                 self.data['odometer'] = self._miles(self.data['tachometer'])
         except:
-            print("CAN error")
+            #print("CAN error")
+            pass
 
     def getData(self):
         return self.data

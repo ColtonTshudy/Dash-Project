@@ -15,7 +15,7 @@ url = 'http://127.0.0.1:5001'
 while True:
     if canner.scan():
         can_data = canner.getData()
-        print(str(can_data))
+        #print(str(can_data))
         query = {'field': can_data}
         try:
             req = requests.post(url, json=can_data)
