@@ -1,11 +1,11 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { io } from "socket.io-client";
+
 import TemperatureGauge from './components/temperature.js';
 import Speedometer from './components/speedometer.js'
 import SevenSegment from './components/seven-segment';
 import DateTime from './components/date-time.js';
-import './fonts/led_counter-7/led_counter-7.ttf';
 import motorIcon from './images/motor.png';
 import mosfetIcon from './images/mosfet.jpg';
 import RadialBar from './components/radial-progress';
@@ -19,18 +19,12 @@ function App() {
     const [data, setData] = useState({})
     const [config, setConfig] = useState({})
 
-    // Setting up socket details
-    socket.on('connect', (msg) => { console.log(msg) });
-    socket.on('data', (can_data) => { setData(can_data); });
-
-    // Get CAN data whenever possible
-    useEffect(() => {
-        console.log('updated')
-        socket.emit('get_data');
-    }, [data])
-
     // Get the config from the server
     useEffect(() => {
+        // Setting up socket details
+        socket.on('connect', (msg) => { console.log(msg) });
+        socket.on('data', (can_data) => { console.log('recieved data'); setData(can_data); });
+
         fetch(`${url}/config_data`).then(res => {
             if (res.status >= 400) {
                 throw new Error("Server responds with error!");
@@ -45,7 +39,18 @@ function App() {
             .catch(err => {
                 console.log(err)
             })
+
+        // On unmount
+        return () => {
+            console.log('disconnected')
+            socket.disconnect()
+        }
     }, [])
+
+    // Request CAN data whenever new data is recieved
+    useEffect(() => {
+        socket.emit('get_data');
+    }, [data])
 
     return (
         <div className="center-screen">
@@ -63,8 +68,8 @@ function App() {
                 <SevenSegment className="battery-voltage flex-center" value={data.battery_voltage} decimals={1} max={80} height={100} width={170} color='red' scale={0.7} />
                 <SevenSegment className="center-gauge flex-center" value={data.mph} max={data.mph} height={125} width={300} color='white' scale={1.0} />
 
-                <img src={motorIcon} id="motor-icon" alt="motor temp icon"/>
-                <img src={mosfetIcon} id="mosfet-icon" alt="mosfet temp icon"/>
+                <img src={motorIcon} id="motor-icon" alt="motor temp icon" />
+                <img src={mosfetIcon} id="mosfet-icon" alt="mosfet temp icon" />
 
                 {/* <RadialBar className="center-gauge mph-progress" value={data.mph} primaryColor={['red','red']} max={50} radius={560} strokeWidth={25} start={0.005} end={0.743} strokeLinecap={'square'}/> */}
                 <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} />
