@@ -52,14 +52,14 @@ def config():
 def get_data():
     global can_data_dict
     can_data_dict = request.json
-    print(f'Recieved from client: {can_data_dict}')
+    # print(f'Recieved from client: {can_data_dict}')
     return Response('success')
 
 ### WEBSOCKET
 @socket.on("connect")
 def connected():
-    print(request.sid)
-    print('client has connected')
+    # print(request.sid)
+    # print('client has connected')
     emit("connect", {'data': f'id: {request.sid} is connected'})
 
 
@@ -71,7 +71,7 @@ def send_data():
 
 @socket.on('disconnect')
 def disconnected():
-    print("user disconnected")
+    # print("user disconnected")
     emit("disconnect", f"user {request.sid} disconnected", broadcast=True)
 
 
