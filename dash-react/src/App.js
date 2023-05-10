@@ -70,7 +70,7 @@ function App() {
                 <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" min={0} max={100} ticks={5} size={200} />
                 <Speedometer value={Math.abs(data.mph)} className="speedometer center-gauge" title="" min={0} max={config.max_speed} ticks={11} size={550} />
 
-                <DateTime className="clock font-face-led" />
+                <DateTime className="clock font-face-dot" />
 
                 <SevenSegment className="battery-voltage flex-center" value={data.battery_voltage} decimals={1} max={80} height={100} width={170} color='red' scale={0.7} />
                 <SevenSegment className="center-gauge flex-center" value={data.mph} max={data.mph} height={125} width={300} color='white' scale={1.0} />

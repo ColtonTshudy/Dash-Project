@@ -125,13 +125,13 @@ body {
 }
 
 .temporary {
-  position:absolute;
-  left:500px;
+  position: absolute;
+  left: 500px;
   top: 500px;
 }
 
 .battery-voltage {
-  position:absolute;
+  position: absolute;
   right: 0px;
   top: 50px;
   background-color: black;
@@ -140,7 +140,7 @@ body {
 }
 
 .center-gauge {
-  position:absolute;
+  position: absolute;
   top: 47%;
   left: 50%;
 }
@@ -152,22 +152,22 @@ body {
   bottom: 0px;
 }
 
-#motor-icon{
-  position:absolute;
-  width: 50px;
-  height: 50px;
-  filter:invert(100%);
-  right:10px;
-  bottom:380px;
-}
-
-#mosfet-icon{
-  position:absolute;
+#motor-icon {
+  position: absolute;
   width: 50px;
   height: 50px;
   filter: invert(100%);
-  right:67px;
-  bottom:380px;
+  right: 10px;
+  bottom: 380px;
+}
+
+#mosfet-icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  filter: invert(100%);
+  right: 67px;
+  bottom: 380px;
 }
 
 #odometer {
@@ -177,31 +177,41 @@ body {
   font-size: 40px;
 }
 
-.font-face-led {
+.font-face-dot {
   font-family: "led_counter-7";
- }
+}
 
- .font-face-rubik {
+.font-face-rubik {
   font-family: "Rubik";
- }
+}
 
- .mph-progress {
+.font-face-horizon {
+  font-family: "Horizon";
+}
+
+.mph-progress {
   rotate: -135deg;
   translate: 1px -2px;
- }
+}
 
- .flip-y {
+.flip-y {
   transform: scaleX(-1);
- }
+}
 
- @font-face {
+@font-face {
   font-family: "led_counter-7";
   src: local("led_counter-7"),
-      url("./fonts/led_counter-7/led_counter-7.ttf") format("truetype");
- }
+    url("./fonts/led_counter-7/led_counter-7.ttf") format("truetype");
+}
 
- @font-face {
+@font-face {
   font-family: "Rubik";
   src: local("Rubik"),
-      url("./fonts/Rubik/static/Rubik-MediumItalic.ttf") format("truetype");
- }
+    url("./fonts/Rubik/static/Rubik-MediumItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Horizon";
+  src: local("Horizon"),
+    url("./fonts/dash-horizon-font/Dashhorizon-eZ5wg.otf") format("opentype");
+}
