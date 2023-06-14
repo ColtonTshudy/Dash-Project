@@ -80,8 +80,8 @@ function App() {
                 <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} />
                 <RadialBar className="center-gauge" value={data.battery_current} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} max={80} radius={700} strokeWidth={30} start={.63} end={.87} />
 
-                <RadialBar className="center-gauge flip-y" value={data.motor_voltage} primaryColor={['red', 'orange']} secondaryColor1={['lime', 'green']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} />
-                <RadialBar className="center-gauge flip-y" value={data.battery_voltage} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} min={40} max={58.8} radius={700} strokeWidth={30} start={.63} end={.87} />
+                <RadialBar className="center-gauge" mirror={true} value={data.motor_voltage} primaryColor={['red', 'orange']} secondaryColor1={['lime', 'green']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} />
+                <RadialBar className="center-gauge" mirror={true} value={data.battery_voltage} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} min={40} max={58.8} radius={700} strokeWidth={30} start={.63} end={.87} />
 
                 <ValueBox className="odometer font-face-dot" value={data.odometer} decimals={2} fontsize={30} units="MI" width={250}/>
 

@@ -30,22 +30,27 @@ const RadialBar = ({
     className,
     start,
     end,
+    mirror,
 }) => {
-    const percentage = Math.abs((value-min) / (max-min));
+    const percentage = Math.abs((value - min) / (max - min));
     const PI = 3.14
-    const R = (radius-strokeWidth)/2
+    const R = (radius - strokeWidth) / 2
+    const xScale = mirror ? -1 : 1
 
     let color = []
     if (value >= 0)
         color = primaryColor
-    else 
+    else
         color = secondaryColor
 
     let circumference = 2 * PI * R
     let gradientId = `${color[0]}${color[1]}`
 
     return (
-        <div id={id} className={className} style={{margin: `${-radius/2}px 0 0 ${-radius/2}px`}}>
+        <div id={id} className={className} style={{
+            margin: `${-radius / 2}px 0 0 ${-radius / 2}px`,
+            transform: `scaleX(${xScale})`,
+        }}>
             <CircleContainer
                 className="react-super-progressbar__base"
                 style={{
@@ -53,7 +58,6 @@ const RadialBar = ({
                     width: `${radius}px`,
                 }}
             >
-
                 <svg
                     width='100%'
                     height='100%'
@@ -76,8 +80,8 @@ const RadialBar = ({
                         cy={radius / 2}
                         stroke={'rgb(0,0,0,.4)'}
                         strokeLinecap={strokeLinecap}
-                        strokeDasharray={`${circumference*(end-start)} ${circumference}`}
-                        strokeDashoffset={-circumference*start}
+                        strokeDasharray={`${circumference * (end - start)} ${circumference}`}
+                        strokeDashoffset={-circumference * start}
                     />
                     <StyledCircle
                         strokeWidth={strokeWidth}
@@ -87,8 +91,8 @@ const RadialBar = ({
                         cy={radius / 2}
                         stroke={`url(#${gradientId})`}
                         strokeLinecap={strokeLinecap}
-                        strokeDasharray={`${percentage*circumference*(end-start)} ${circumference}`}
-                        strokeDashoffset={-circumference*start}
+                        strokeDasharray={`${percentage * circumference * (end - start)} ${circumference}`}
+                        strokeDashoffset={-circumference * start}
                     />
                 </svg>
             </CircleContainer>
