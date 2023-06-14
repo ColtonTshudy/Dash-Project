@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Component = (className) => {
+const Component = ({ className }) => {
     
 
     return (

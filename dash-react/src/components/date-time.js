@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export const DateTime = ({ className }) => {
+const DateTime = ({ className }) => {
 
     var [date, setDate] = useState(new Date());
 

@@ -1,25 +1,21 @@
 import React, { useRef, useEffect } from 'react';
 import { LinearGauge } from 'canvas-gauges';
 
-const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
+const SoC = ({ className, value, size }) => {
     const canvasRef = useRef();
     const gaugeRef = useRef();
-    const danger = 0.5; // Start making number red at this percent
+    const danger = 0.5; // Start making number red under this percent
 
     const height = size * 2
-    const width = size / 2
-
-    let valColor = `rgb(255,${255 * (max * danger) / value},${255 * (max * danger) / value})`
-    if (isNaN(valColor))
-        valColor = 'white'
+    const width = size / 3
 
     useEffect(() => {
         gaugeRef.current = new LinearGauge({
             renderTo: canvasRef.current,
             width: width,
             height: height,
-            minValue: min,
-            maxValue: max,
+            minValue: 0,
+            maxValue: 99,
             highlights: [],
             majorTicks: [0],
             minorTicks: 2,
@@ -27,9 +23,9 @@ const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
             borders: false,
             colorPlate: 'rgb(0,0,0,0)',
 
-            value: value,
+            value: value*100-1,
             colorValueBoxBackground: null,
-            fontValueSize: 85,
+            fontValueSize: 130,
             fontNumbersSize: 25,
             valueBoxStroke: 0,
             valueInt: 2,
@@ -42,11 +38,10 @@ const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
             fontUnitsSize: 25,
             barProgress: true,
             barStrokeWidth: 0,
-            colorBarProgress: 'pink',
+            colorBarProgress: 'rgb(100,255,100,1)',
             colorBar: 'rgb(255,255,255,0.2)',
-            needle: true,
-            needleSide: 'right',
-            needleWidth: 10,
+            needle: false,
+            barBeginCircle: false,
         });
         gaugeRef.current.draw();
 
@@ -57,20 +52,21 @@ const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
 
     return (
         <div className={className}>
-            <canvas ref={canvasRef} style={{ zIndex: 1 }} />
+            <canvas ref={canvasRef} style={{ }} />
             <div style={{
                 position: 'absolute',
                 width: `57px`,
                 height: `40px`,
-                backgroundColor: valColor,
-                bottom: '7%',
-                left: '20%',
+                backgroundColor: 'white',
+                bottom: '8%',
+                left: '5%',
                 borderRadius: '10px',
+                zIndex: -1
             }}>
-                {/* <label style={{ transform: 'translate(50% 50%)', color: 'black', fontFamily: "Horizon", fontSize: 50 }}>{Math.trunc(value)}</label> */}
+                {/* <label style={{ bottom:'50%', color: 'black', fontFamily: "rubik", fontSize: 42 }}>{Math.trunc(value*100)}</label> */}
             </div>
         </div >
     )
 };
 
-export default TemperatureGauge;
+export default SoC;

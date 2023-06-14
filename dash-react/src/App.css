@@ -19,6 +19,7 @@ body {
   color: white;
   overflow: hidden;
   position: relative;
+  z-index: -10;
 }
 
 .center-screen {
@@ -170,11 +171,38 @@ body {
   bottom: 380px;
 }
 
-#odometer {
+.odometer {
   position: absolute;
-  bottom: 80px;
-  left: 425px;
+  left: 50%;
+  bottom: 15%;
   font-size: 40px;
+  color: black;
+  background-color: white;
+  box-shadow: 1px 1px 20px 5px black;
+}
+
+.mph-progress {
+  rotate: -135deg;
+  translate: 1px -2px;
+}
+
+.flip-y {
+  transform: scaleX(-1);
+}
+
+.soc {
+  position:absolute;
+  left: 1%;
+  bottom: 10%;
+}
+
+.voltmeter {
+  position:absolute;
+  right:0%;
+  top:6%;
+  color: rgb(100,255,100,1);
+  background-color: black;
+  text-shadow: 0 0 10px rgb(100,255,100,1);
 }
 
 .font-face-dot {
@@ -189,13 +217,8 @@ body {
   font-family: "Horizon";
 }
 
-.mph-progress {
-  rotate: -135deg;
-  translate: 1px -2px;
-}
-
-.flip-y {
-  transform: scaleX(-1);
+.font-face-segment {
+  font-family: "Seven_Segment";
 }
 
 @font-face {
@@ -214,4 +237,10 @@ body {
   font-family: "Horizon";
   src: local("Horizon"),
     url("./fonts/dash-horizon-font/Dashhorizon-eZ5wg.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Seven_Segment";
+  src: local("Seven_Segment"),
+    url("./fonts/fonts-DSEG_v046/DSEG14-Modern/DSEG14Modern-Italic.ttf") format("truetype");
 }
