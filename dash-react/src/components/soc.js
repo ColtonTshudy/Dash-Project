@@ -8,6 +8,7 @@ const SoC = ({ className, value, size }) => {
 
     const height = size * 2
     const width = size / 3
+    var justify = Math.floor(Math.log10(value)) < 1 ? 'center' : 'left'
 
     useEffect(() => {
         gaugeRef.current = new LinearGauge({
@@ -23,23 +24,13 @@ const SoC = ({ className, value, size }) => {
             borders: false,
             colorPlate: 'rgb(0,0,0,0)',
 
-            value: value*100-1,
-            colorValueBoxBackground: null,
-            fontValueSize: 130,
-            fontNumbersSize: 25,
-            valueBoxStroke: 0,
-            valueInt: 2,
-            valueDec: 0,
-            fontValue: 'Rubik',
-            valueTextShadow: 'true',
-            colorValueTextShadow: 'rgb(255,255,255,1)',
+            value: value * 100 - 1,
+            valueBox: false,
 
-            colorValueText: 'black',
-            fontUnitsSize: 25,
             barProgress: true,
             barStrokeWidth: 0,
-            colorBarProgress: 'rgb(100,255,100,1)',
-            colorBar: 'rgb(255,255,255,0.2)',
+            colorBarProgress: `rgb(${255 * (1 - value + 0.5)},${255 * (value + .4)},${100},1)`,
+            colorBar: 'rgb(0,0,0,0.5)',
             needle: false,
             barBeginCircle: false,
         });
@@ -52,18 +43,24 @@ const SoC = ({ className, value, size }) => {
 
     return (
         <div className={className}>
-            <canvas ref={canvasRef} style={{ }} />
+            <canvas ref={canvasRef} style={{ zIndex: 1 }} />
             <div style={{
                 position: 'absolute',
                 width: `57px`,
                 height: `40px`,
-                backgroundColor: 'white',
-                bottom: '8%',
+                backgroundColor: 'rgb(100,100,100,0.5)',
+                bottom: '-2%',
                 left: '5%',
                 borderRadius: '10px',
-                zIndex: -1
+                fontFamily: 'Rubik',
+                fontSize: 40,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: justify,
+                textShadow: '0 0 10px black',
+                boxShadow: `0 0 30px rgb(${255 * (1 - value + 0.5)},${255 * (value + .4)},${100},.75)`,
             }}>
-                {/* <label style={{ bottom:'50%', color: 'black', fontFamily: "rubik", fontSize: 42 }}>{Math.trunc(value*100)}</label> */}
+                {Math.floor(value*100)-1}
             </div>
         </div >
     )

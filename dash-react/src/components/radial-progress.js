@@ -31,11 +31,15 @@ const RadialBar = ({
     start,
     end,
     mirror,
+    tx,
+    ty,
+    background=true,
 }) => {
     const percentage = Math.abs((value - min) / (max - min));
     const PI = 3.14
     const R = (radius - strokeWidth) / 2
     const xScale = mirror ? -1 : 1
+    const bg = background ? 'rgb(0,0,0,.4)' : 'rgb(0,0,0,0)'
 
     let color = []
     if (value >= 0)
@@ -78,7 +82,7 @@ const RadialBar = ({
                         r={R}
                         cx={radius / 2}
                         cy={radius / 2}
-                        stroke={'rgb(0,0,0,.4)'}
+                        stroke={bg}
                         strokeLinecap={strokeLinecap}
                         strokeDasharray={`${circumference * (end - start)} ${circumference}`}
                         strokeDashoffset={-circumference * start}
@@ -96,6 +100,15 @@ const RadialBar = ({
                     />
                 </svg>
             </CircleContainer>
+            <text style={{
+                bottom: `${ty}`,
+                left: `${tx}`,
+                position: 'absolute',
+                fontFamily: "Rubik",
+                transform: `scaleX(${xScale})`,
+            }}>
+                TEST
+            </text>
         </div>
     )
 }

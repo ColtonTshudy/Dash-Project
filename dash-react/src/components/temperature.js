@@ -1,17 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import { LinearGauge } from 'canvas-gauges';
 
-const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
+const TemperatureGauge = ({ className, value, min, max, size }) => {
     const canvasRef = useRef();
     const gaugeRef = useRef();
     const danger = 0.5; // Start making number red at this percent
 
     const height = size * 2
     const width = size / 2
+    var justify = Math.floor(Math.log10(value)) < 1 ? 'center' : 'left'
 
-    let valColor = `rgb(255,${255 * (max * danger) / value},${255 * (max * danger) / value})`
-    if (isNaN(valColor))
-        valColor = 'white'
+    // let valColor = `rgb(255,${255 * (max * danger) / value},${255 * (max * danger) / value})`
+    // if (isNaN(valColor))
+    //     valColor = 'white'
 
     useEffect(() => {
         gaugeRef.current = new LinearGauge({
@@ -28,22 +29,12 @@ const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
             colorPlate: 'rgb(0,0,0,0)',
 
             value: value,
-            colorValueBoxBackground: null,
-            fontValueSize: 85,
-            fontNumbersSize: 25,
-            valueBoxStroke: 0,
-            valueInt: 2,
-            valueDec: 0,
-            fontValue: 'Rubik',
-            valueTextShadow: 'true',
-            colorValueTextShadow: 'rgb(255,255,255,1)',
+            valueBox: false,
 
-            colorValueText: 'black',
-            fontUnitsSize: 25,
             barProgress: true,
             barStrokeWidth: 0,
             colorBarProgress: 'pink',
-            colorBar: 'rgb(255,255,255,0.2)',
+            colorBar: 'rgb(0,0,0,0.5)',
             needle: true,
             needleSide: 'right',
             needleWidth: 10,
@@ -55,6 +46,8 @@ const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
         };
     });
 
+    // rgb(255,100,100,${(value/max-danger)/(1-danger)})
+
     return (
         <div className={className}>
             <canvas ref={canvasRef} style={{ zIndex: 1 }} />
@@ -62,12 +55,17 @@ const TemperatureGauge = ({ className, value, min, max, ticks, size }) => {
                 position: 'absolute',
                 width: `57px`,
                 height: `40px`,
-                backgroundColor: valColor,
-                bottom: '7%',
+                bottom: '-2%',
                 left: '20%',
                 borderRadius: '10px',
+                fontFamily: 'Rubik',
+                fontSize: 40,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: justify,
+                textShadow: '0 0 10px black',
             }}>
-                {/* <label style={{ transform: 'translate(50% 50%)', color: 'black', fontFamily: "Horizon", fontSize: 50 }}>{Math.trunc(value)}</label> */}
+                {Math.floor(value)}
             </div>
         </div >
     )

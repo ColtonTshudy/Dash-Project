@@ -13,9 +13,10 @@ body {
 }
 
 .viewport {
+  /* background: rgb(33, 44, 56); */
   width: 1024px;
   height: 600px;
-  background: rgb(33, 44, 56);
+  background: radial-gradient(#3f4866 35%, black 100%);
   color: white;
   overflow: hidden;
   position: relative;
@@ -103,13 +104,13 @@ body {
 .motor-temp {
   position: absolute;
   right: -20px;
-  bottom: 0px;
+  bottom: 5%;
 }
 
 .mosfet-temp {
   position: absolute;
   right: 40px;
-  bottom: 0px;
+  bottom: 5%;
 }
 
 .speedometer {
@@ -153,13 +154,18 @@ body {
   bottom: 0px;
 }
 
+.clock-new {
+  bottom: 0%;
+  left: 50%;
+}
+
 #motor-icon {
   position: absolute;
   width: 50px;
   height: 50px;
   filter: invert(100%);
   right: 10px;
-  bottom: 380px;
+  bottom: 410px;
 }
 
 #mosfet-icon {
@@ -168,7 +174,7 @@ body {
   height: 50px;
   filter: invert(100%);
   right: 67px;
-  bottom: 380px;
+  bottom: 410px;
 }
 
 .odometer {
@@ -183,26 +189,39 @@ body {
 
 .mph-progress {
   rotate: -135deg;
-  translate: 1px -2px;
-}
-
-.flip-y {
-  transform: scaleX(-1);
+  translate: 1px -3px;
+  z-index: 0;
 }
 
 .soc {
-  position:absolute;
+  position: absolute;
   left: 1%;
-  bottom: 10%;
+  bottom: 15%;
 }
 
 .voltmeter {
-  position:absolute;
-  right:0%;
-  top:6%;
-  color: rgb(100,255,100,1);
-  text-shadow: rgb(100,255,100,1);
+  position: absolute;
+  border-radius: 10px;
+  right: 0%;
+  top: 6%;
+  color: rgb(100, 255, 100, 1);
+  text-shadow: 0 0 15px rgb(100, 255, 100, 1);
   background-color: black;
+}
+
+.speed-ro {
+  position: 'absolute';
+  color: #ffffff;
+  text-shadow: 0 0 10px rgb(255, 255, 255, 1);
+  z-index: 10;
+}
+
+.speed-ro-bg {
+  background-color: rgb(49, 83, 58);
+  border-radius: 30px;
+  color: rgb(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 40px 10px black;
+  z-index: 9;
 }
 
 .font-face-dot {
@@ -242,5 +261,5 @@ body {
 @font-face {
   font-family: "Seven_Segment";
   src: local("Seven_Segment"),
-    url("./fonts/fonts-DSEG_v046/DSEG14-Modern/DSEG14Modern-Italic.ttf") format("truetype");
+    url("./fonts/fonts-DSEG_v046/DSEG14-Modern/DSEG14Modern-Regular.ttf") format("truetype");
 }
