@@ -177,14 +177,20 @@ body {
   bottom: 410px;
 }
 
-.odometer {
+#battery-icon {
   position: absolute;
-  left: 50%;
-  bottom: 15%;
-  font-size: 40px;
-  color: black;
-  background-color: white;
-  box-shadow: 1px 1px 20px 5px black;
+  width: 60px;
+  filter: invert(100%);
+  left: 3px;
+  bottom: 410px;
+}
+
+#vesc-icon {
+  position: absolute;
+  width: 15%;
+  top: 1%;
+  left: 1%;
+  filter: grayscale(100%) invert(100%);
 }
 
 .mph-progress {
@@ -193,10 +199,21 @@ body {
   z-index: 0;
 }
 
+.odometer-bg {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  border-radius: 10px;
+  font-size: 40px;
+  background-color: white;
+  color: lightgrey;
+  z-index: 9;
+}
+
 .soc {
   position: absolute;
-  left: 1%;
-  bottom: 15%;
+  left: 0%;
+  bottom: 5%;
 }
 
 .voltmeter {
@@ -207,6 +224,20 @@ body {
   color: rgb(100, 255, 100, 1);
   text-shadow: 0 0 15px rgb(100, 255, 100, 1);
   background-color: black;
+  box-shadow: 0 0 10px 5px black;
+}
+
+.odometer {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  border-radius: 10px;
+  font-size: 40px;
+  color: black;
+  background-color: rgb(217, 243, 224);
+  box-shadow: 0px 3px 10px 2px black,
+    inset 0 0 20px 3px black;
+  z-index: 10;
 }
 
 .speed-ro {
@@ -217,10 +248,10 @@ body {
 }
 
 .speed-ro-bg {
-  background-color: rgb(49, 83, 58);
+  background-color: rgb(61, 85, 67);
   border-radius: 30px;
   color: rgb(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 40px 10px black;
+  box-shadow: inset 0 0 40px 10px black, 0 0 10px 1px;
   z-index: 9;
 }
 

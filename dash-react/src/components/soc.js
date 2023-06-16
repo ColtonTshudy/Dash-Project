@@ -48,7 +48,6 @@ const SoC = ({ className, value, size }) => {
                 position: 'absolute',
                 width: `57px`,
                 height: `40px`,
-                backgroundColor: 'rgb(100,100,100,0.5)',
                 bottom: '-2%',
                 left: '5%',
                 borderRadius: '10px',
@@ -58,7 +57,6 @@ const SoC = ({ className, value, size }) => {
                 alignItems: 'center',
                 justifyContent: justify,
                 textShadow: '0 0 10px black',
-                boxShadow: `0 0 30px rgb(${255 * (1 - value + 0.5)},${255 * (value + .4)},${100},.75)`,
             }}>
                 {Math.floor(value*100)-1}
             </div>

@@ -4,12 +4,16 @@ const ValueBox = ({ className, value, units, fontsize, width, decimals, justify 
     ValueBox.defaultProps = {
         units: '',
         decimals: 0,
-        justify: 'right'        
+        justify: 'right'
     }
 
     const height = fontsize * 1.1;
     const padding = fontsize / 10;
     const decimal_mp = Math.pow(10, decimals);
+    let display = padZeros(decimals, Math.round(value * decimal_mp) / decimal_mp)
+
+    if (isNaN(value))
+        display = value
 
     return (
         <div className={className} style={{
@@ -20,7 +24,7 @@ const ValueBox = ({ className, value, units, fontsize, width, decimals, justify 
             fontSize: `${fontsize}px`,
             padding: `${padding}px`,
         }}>
-            {padZeros(decimals, Math.round(value * decimal_mp) / decimal_mp)} {units}
+            {display} {units}
         </div>
     );
 }

@@ -6,11 +6,14 @@ import TemperatureGauge from './components/temperature.js';
 import Speedometer from './components/speedometer.js'
 import SevenSegment from './components/seven-segment';
 import DateTime from './components/date-time.js';
-import motorIcon from './images/motor.png';
-import mosfetIcon from './images/mosfet.jpg';
 import RadialBar from './components/radial-progress';
 import ValueBox from './components/valuebox'
 import SoC from './components/soc';
+
+import motorIcon from './images/motor.png';
+import mosfetIcon from './images/mosfet.jpg';
+import batteryIcon from './images/battery.png';
+import vescIcon from './images/VESC-Project_Logo_small.png'
 
 // Connect to socket
 const url = "http://localhost:5001/"
@@ -71,7 +74,8 @@ function App() {
                 <TemperatureGauge value={data.mos_temp} className="mosfet-temp flex-center" min={0} max={100} ticks={5} size={200} />
 
                 <Speedometer soc={soc} value={Math.abs(data.mph)} className="speedometer center-gauge" title="" min={0} max={max_speed} ticks={11} size={550} />
-                <RadialBar className="center-gauge mph-progress" value={data.mph} primaryColor={['red','red']} max={50} radius={535} strokeWidth={13} start={-0.001} end={0.743} strokeLinecap={'square'} background={false}/>
+                {/* <RadialBar className="center-gauge mph-progress" value={data.mph} primaryColor={['red','red']} max={50} radius={535} strokeWidth={13} start={-0.001} end={0.743} strokeLinecap={'square'} background={false}/> */}
+                <ValueBox className={'mph-label'} value='mph'/>
 
                 <DateTime className="clock-new font-face-dot" fontsize={40} width={250} justify={'center'}/>
 
@@ -85,12 +89,14 @@ function App() {
 
                 <img src={motorIcon} id="motor-icon" alt="motor temp icon" />
                 <img src={mosfetIcon} id="mosfet-icon" alt="mosfet temp icon" />
+                <img src={batteryIcon} id="battery-icon" alt="battery icon" />
+                <img src={vescIcon} id="vesc-icon" alt="vesc icon" />
 
-                <RadialBar className="center-gauge" value={data.motor_current} primaryColor={['red', 'orange']} secondaryColor={['lime', 'green']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} tx='20%' ty='6%'/>
-                <RadialBar className="center-gauge" value={data.battery_current} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} max={80} radius={700} strokeWidth={30} start={.63} end={.87} tx='10%' ty='10%' />
+                <RadialBar className="center-gauge" value={data.motor_current} units='A' primaryColor={['lightcoral', 'plum']} secondaryColor={['palegreen', 'seagreen']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} tx='20%' ty='6%' showValue={true}/>
+                <RadialBar className="center-gauge" value={data.battery_current} units='V' primaryColor={['khaki', 'orange']} secondaryColor={['palegreen', 'seagreen']} max={80} radius={700} strokeWidth={30} start={.63} end={.87} tx='12%' ty='11.5%' showValue={true}/>
 
-                <RadialBar className="center-gauge" mirror={true} value={data.motor_voltage} primaryColor={['red', 'orange']} secondaryColor1={['lime', 'green']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} />
-                <RadialBar className="center-gauge" mirror={true} value={data.battery_voltage} primaryColor={['orange', 'yellow']} secondaryColor={['lime', 'green']} min={40} max={58.8} radius={700} strokeWidth={30} start={.63} end={.87} />
+                <RadialBar className="center-gauge" mirror={true} value={data.motor_voltage} units='A' primaryColor={['lightcoral', 'plum']} secondaryColor1={['palegreen', 'seagreen']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} tx='20%' ty='6%' showValue={true}/>
+                <RadialBar className="center-gauge" mirror={true} value={data.battery_voltage} units='V' primaryColor={['khaki', 'orange']} secondaryColor={['palegreen', 'seagreen']} min={40} max={58.8} radius={700} strokeWidth={30} start={.63} end={.87} tx='12%' ty='11.5%' showValue={true}/>
 
                 <SoC className="soc" value={soc} size={200} />
 

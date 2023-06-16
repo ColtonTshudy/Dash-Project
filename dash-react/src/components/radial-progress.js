@@ -34,12 +34,15 @@ const RadialBar = ({
     tx,
     ty,
     background=true,
+    showValue=false,
+    units,
 }) => {
     const percentage = Math.abs((value - min) / (max - min));
     const PI = 3.14
     const R = (radius - strokeWidth) / 2
     const xScale = mirror ? -1 : 1
     const bg = background ? 'rgb(0,0,0,.4)' : 'rgb(0,0,0,0)'
+    const textVisible = showValue? 'visible' : 'hidden'
 
     let color = []
     if (value >= 0)
@@ -100,14 +103,15 @@ const RadialBar = ({
                     />
                 </svg>
             </CircleContainer>
-            <text style={{
+            <text className='font-face-rubik' style={{
                 bottom: `${ty}`,
                 left: `${tx}`,
                 position: 'absolute',
-                fontFamily: "Rubik",
+                fontSize: '20px',
                 transform: `scaleX(${xScale})`,
+                visibility: `${textVisible}`,
             }}>
-                TEST
+                {Math.trunc(value)} {units}
             </text>
         </div>
     )
