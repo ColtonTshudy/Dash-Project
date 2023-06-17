@@ -26,7 +26,7 @@ class Canner:
         self.config = dict(parser.items("MOTOR_SETTINGS"))
         for key in self.config:
             self.config[key] = int(self.config[key])
-        self.bus = Bus(interface='socketcan', channel='can0', bitrate=1000000)
+        self.bus = Bus(interface='socketcan', channel='can0', bitrate=500000)
         self.msg = None
         self.msg_type = None
         self.id_list = []
