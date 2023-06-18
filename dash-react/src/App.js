@@ -93,9 +93,9 @@ function App() {
                 <img src={vescIcon} id="vesc-icon" alt="vesc icon" />
 
                 <RadialBar className="center-gauge" value={data.motor_current} units='A' primaryColor={['lightcoral', 'plum']} secondaryColor={['palegreen', 'seagreen']} max={150} radius={610} strokeWidth={20} start={.6} end={.9} tx='20%' ty='6%' showValue={true}/>
-                <RadialBar className="center-gauge" value={data.battery_current} units='V' primaryColor={['khaki', 'orange']} secondaryColor={['palegreen', 'seagreen']} max={80} radius={700} strokeWidth={30} start={.63} end={.87} tx='12%' ty='11.5%' showValue={true}/>
+                <RadialBar className="center-gauge" value={data.battery_current} units='A' primaryColor={['khaki', 'orange']} secondaryColor={['palegreen', 'seagreen']} max={80} radius={700} strokeWidth={30} start={.63} end={.87} tx='12%' ty='11.5%' showValue={true}/>
 
-                <RadialBar className="center-gauge" mirror={true} value={data.motor_voltage} units='A' primaryColor={['lightcoral', 'plum']} secondaryColor1={['palegreen', 'seagreen']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} tx='20%' ty='6%' showValue={true}/>
+                <RadialBar className="center-gauge" mirror={true} value={data.motor_voltage} units='V' primaryColor={['lightcoral', 'plum']} secondaryColor1={['palegreen', 'seagreen']} max={58.8} radius={610} strokeWidth={20} start={.6} end={.9} tx='20%' ty='6%' showValue={true}/>
                 <RadialBar className="center-gauge" mirror={true} value={data.battery_voltage} units='V' primaryColor={['khaki', 'orange']} secondaryColor={['palegreen', 'seagreen']} min={40} max={58.8} radius={700} strokeWidth={30} start={.63} end={.87} tx='12%' ty='11.5%' showValue={true}/>
 
                 <SoC className="soc" value={soc} size={200} />
